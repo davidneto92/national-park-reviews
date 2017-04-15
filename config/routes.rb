@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   # get 'secret' => 'pages#secret'
 
   resources :users
+  resources :parks
 end
