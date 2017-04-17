@@ -1,1 +1,23 @@
 <h1>All the parks!</h1>
+
+<div class="index-display">
+  <ul>
+    <% @parks.each do |park| %>
+      <li>
+        <span class ="park-entry">
+
+          <div class="park-picture-wrapper">
+            <a href="<%= "parks/#{park.id}" %>">
+            <img class="park-index-picture" alt="link to park" src="<%= park.main_image %>" ></a>
+          </div>
+
+          <div class="text-wrapper">
+            <%= link_to "#{park.name}", park_path(park) %>
+            <%= park.state %>
+          </div>
+
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>
