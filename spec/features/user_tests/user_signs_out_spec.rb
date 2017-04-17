@@ -11,12 +11,10 @@ feature "logged in users can sign out" do
     click_on "Log in"
 
     expect(page).to have_content("Log in successful.")
-    # expect(current_user).to eq(signed_in_user)
-    # binding.pry
     click_link "Sign out"
 
     expect(page).to have_content("Log out successful.")
-    # expect(current_user).to be(nil)
+    expect(page).to_not have_link("Sign out")
   end
 
   scenario "user must be signed in to sign out" do
