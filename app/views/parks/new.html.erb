@@ -1,0 +1,16 @@
+<h1>Add a new National Park</h1>
+
+<%= form_for(@park) do |f| %>
+
+  <%= f.label :name, "Park Name" %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :state, "State" %>
+  <%= f.select :state, @state_collection %><br>
+
+  <%= f.label :main_image, "Park Image" %>
+  <%= f.file_field :main_image %><br>
+
+  <%= f.submit 'Submit' %>
+
+<% end %>
