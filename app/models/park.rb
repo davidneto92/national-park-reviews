@@ -1,6 +1,9 @@
 class Park < ApplicationRecord
   belongs_to :user
 
+  validates :name, presence: true, uniqueness: true
+  validates :main_image, presence: true
+
   STATES = [
     ["Alabama", "AL"],
     ["Alaska", "AK"],
