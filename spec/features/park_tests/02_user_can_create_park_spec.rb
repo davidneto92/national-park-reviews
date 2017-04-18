@@ -16,6 +16,7 @@ feature "user can create a park" do
     select "Utah", from: "State"
     attach_file("Park Image", "#{Rails.root}/spec/support/upload_test_picture.jpg")
     click_button "Submit"
+    save_and_open_page
 
     expect(page).to have_content("Arches National Park")
     expect(page).to have_content("Utah")
