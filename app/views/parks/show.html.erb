@@ -2,4 +2,4 @@
 <h3><%= @park.name %></h3><br>
 <%= @state[0] %>
 
-<img class="park-show-picture" alt="main_park_image" src="<%= @park.main_image %>" ></a>
+<%= image_tag @park.main_image.url %>

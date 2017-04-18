@@ -3,7 +3,8 @@ require "rails_helper"
 feature "users can view park(s)" do
   scenario "signed in users can view index page that lists all parks" do
     user = FactoryGirl.create(:user)
-    park_01 = FactoryGirl.create(:park, main_image: "#{Rails.root}/spec/support/images/mountains_01.jpg")
+    park_01 = FactoryGirl.create(:park)
+    # park_01 = FactoryGirl.create(:park, main_image: "#{Rails.root}/spec/support/images/mountains_01.jpg")
     park_02 = FactoryGirl.create(:park, main_image: "#{Rails.root}/spec/support/images/mountains_02.jpg")
 
     visit "/"

@@ -2,6 +2,18 @@
 
 <%= form_for(@park) do |f| %>
 
+  <% if @park.errors.any? %>
+      <div id="new-park-error">
+        <h2><%= pluralize(@park.errors.count, "error") %> in park creation:</h2>
+
+        <ul>
+        <% @park.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
   <%= f.label :name, "Park Name" %>
   <%= f.text_field :name %><br>
 
@@ -10,6 +22,7 @@
 
   <%= f.label :main_image, "Park Image" %>
   <%= f.file_field :main_image %><br>
+
 
   <%= f.submit 'Submit' %>
 
