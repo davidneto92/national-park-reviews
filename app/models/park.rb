@@ -1,7 +1,9 @@
 class Park < ApplicationRecord
+  mount_uploader :main_image, ParkPictureUploader
+
   belongs_to :user
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true
 
   STATES = [

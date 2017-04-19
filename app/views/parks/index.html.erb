@@ -8,7 +8,7 @@
 
           <div class="park-picture-wrapper">
             <a href="<%= "parks/#{park.id}" %>">
-            <img class="park-index-picture" alt="link to park" src="<%= park.main_image %>" ></a>
+            <%= image_tag park.main_image.thumb %></a>
           </div>
 
           <div class="text-wrapper">
