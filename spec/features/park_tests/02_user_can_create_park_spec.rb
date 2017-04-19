@@ -50,5 +50,5 @@ feature "user can create a park" do
     expect(page).to have_content("This park has already been created.")
   end
 
-  # access to park creation tested in users spec
+  # authorization to park creation to be tested in users spec
 end

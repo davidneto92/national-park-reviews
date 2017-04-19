@@ -6,4 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable #,:rememberable
   # validates :display_name, allow_blank: true
+
+  def admin?
+    return self.role == "admin"
+  end
 end

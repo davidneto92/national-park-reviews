@@ -13,6 +13,11 @@ class ParksController < ApplicationController
     @state_collection = Park::STATES
   end
 
+  def edit
+    @park = Park.find(params[:id])
+    @state_collection = Park::STATES
+  end
+
   def create
     @park = Park.new(new_park_params)
     @park.user_id = current_user.id
@@ -27,6 +32,19 @@ class ParksController < ApplicationController
     end
   end
 
+  def update
+    @park = Park.find(params[:id])
+
+    if @park.update(new_park_params)
+      flash[:notice] = "#{@park.name} updated."
+      redirect_to park_path(@park)
+    else
+      flash[:alert] = "Update failed"
+      @state_collection = Park::STATES
+      render :edit
+    end
+  end
+
   private
 
   def new_park_params
@@ -34,7 +52,8 @@ class ParksController < ApplicationController
       :name,
       :main_image,
       :state,
-      # :user_id
+      :year_founded,
+      :area_miles
     )
   end
 end

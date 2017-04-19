@@ -41,9 +41,7 @@ feature "users can view park(s)" do
 
     visit "/"
 
-    # checks for a text link and a picture link
     expect(page).to have_link(park_01.name)
-    expect(page).to have_xpath("//a/img[@alt='link to park']")
   end
 
   pending "park index is paginated" # to be added

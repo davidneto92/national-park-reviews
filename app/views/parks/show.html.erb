@@ -1,5 +1,18 @@
 <h1>Look at all of this information!</h1>
-<h3><%= @park.name %></h3><br>
-<%= @state[0] %>
+
+  <% if current_user.id == @park.user_id || current_user.admin? %>
+    <%= link_to "Edit Park", edit_park_path(@park) %><br>
+  <% end %>
+
+<h3><%= @park.name %></h3>
+<ul>
+  <li>Location: <%= @state[0] %></li>
+  <% if !@park.year_founded.nil? %>
+    <li>Year Founded: <%= @park.year_founded %></li>
+  <% end %>
+  <% if !@park.area_miles.nil? %>
+    <li>Area (sq. miles): <%= @park.area_miles %></li>
+  <% end %>
+</ul>
 
 <%= image_tag @park.main_image.url %>
