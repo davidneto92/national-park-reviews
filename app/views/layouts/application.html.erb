@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>National Parks Review</title>
+    <link rel="shortcut icon" href="https://s3.amazonaws.com/national-park-reviews-development/my_site.ico">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -13,8 +14,8 @@
     <p class="alert"><%= alert %></p>
 
     <% if signed_in? %>
-      <%= current_user.email %>
-      <%= link_to "Add a Park", new_park_path %>
+      <%= link_to "#{current_user.email}", user_path(current_user) %> |
+      <%= link_to "Add a Park", new_park_path %> |
       <%= link_to "Sign out", destroy_user_session_path, data: { method: 'delete' } %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>

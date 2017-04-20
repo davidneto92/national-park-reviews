@@ -1,0 +1,19 @@
+
+<h1><%= @user.email %>'s details</h1>
+<% if current_user.id == @user.id || current_user.admin? %>
+  <%= link_to "Edit Display Name", edit_user_path(@user) %><br>
+<% end %>
+
+<p>Display Name:
+<% if @user.display_name.nil? %>
+  <%= "not set" %>
+<% else %>
+  <%= @user.display_name %>
+<% end %></p>
+
+<h3>Submitted Parks</h3>
+<ul>
+  <% @parks.each do |park| %>
+    <li><%= link_to "#{park.name}", park_path(park) %></li>
+  <% end %>
+</ul>

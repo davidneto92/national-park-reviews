@@ -20,6 +20,10 @@
 
   <%= f.label :main_image, "Park Image" %>
   <%= f.file_field :main_image %><br>
+    <% if f.object.main_image? %>
+    <%= image_tag f.object.main_image.thumb.url %>
+  <% end %>
+
 
   <%= f.label :year_founded, "Year Founded" %><em> (optional)</em>
   <%= f.text_field :year_founded %><br>
