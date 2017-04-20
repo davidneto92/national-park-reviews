@@ -1,11 +1,18 @@
+<h1>
+  <% if @user.display_name.nil? || @user.display_name == "" %>
+    <%= @user.email %>'s details</h1>
+  <% else %>
+    <%= @user.display_name %>'s details</h1>
+  <% end %>
+  <%= image_tag @user.avatar.thumb %><br>
 
-<h1><%= @user.email %>'s details</h1>
 <% if current_user.id == @user.id || current_user.admin? %>
-  <%= link_to "Edit Display Name", edit_user_path(@user) %><br>
+  <%= link_to "Manage Sign in Details", edit_user_registration_path %><br>
+  <%= link_to "Edit Display Name and Avatar", edit_user_path(@user) %>
 <% end %>
 
 <p>Display Name:
-<% if @user.display_name.nil? %>
+<% if @user.display_name.nil? || @user.display_name == "" %>
   <%= "not set" %>
 <% else %>
   <%= @user.display_name %>

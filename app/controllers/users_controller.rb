@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Account details updated."
       redirect_to user_path(@user)
     else
-      flash[:alert] = "Update failed"
+      flash[:alert] = "That image is too large. Avatars must be smaller than 500kb."
       render :edit
     end
   end
@@ -33,14 +33,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :email,
       :password,
-      :display_name
+      :display_name,
+      :avatar,
+      :remove_avatar
     )
   end
 
   def authorize_user
     if !user_signed_in?
-      flash[:notice] = "Not authorized. Please sign in to view this user."
-      redirect_to "/"
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
     end
   end
 

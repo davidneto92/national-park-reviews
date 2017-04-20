@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.string :display_name
+      t.string :display_name, default: ""
 
       ## Administrator value, method in model to return true or false
       t.string :role, default: "member"

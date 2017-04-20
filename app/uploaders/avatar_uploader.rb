@@ -1,5 +1,9 @@
-class ParkPictureUploader < CarrierWave::Uploader::Base
+class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+
+  def default_url(*args)
+    "https://s3.amazonaws.com/national-park-reviews-development/uploads/avatars/default_avatar.jpg"
+  end
 
   if Rails.env.test? or Rails.env.cucumber?
     CarrierWave.configure do |config|
@@ -11,8 +15,6 @@ class ParkPictureUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    # "../app/assets/images/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
-    # "#{Rails.root}/app/assets/images/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
     "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
   end
 

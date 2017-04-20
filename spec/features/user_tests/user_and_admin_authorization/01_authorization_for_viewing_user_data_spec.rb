@@ -6,10 +6,10 @@ feature "users must be signed in to user information" do
     user_02 = FactoryGirl.create(:user)
 
     visit "/users/#{user_01.id}"
-    expect(page).to have_content("Not authorized. Please sign in to view this user.")
+    expect(page).to have_content("The page you were looking for doesn't exist.")
     expect(page).to_not have_content("#{user_01.email}")
     visit "/users/#{user_02.id}"
-    expect(page).to have_content("Not authorized. Please sign in to view this user.")
+    expect(page).to have_content("The page you were looking for doesn't exist.")
     expect(page).to_not have_content("#{user_02.email}")
   end
 
