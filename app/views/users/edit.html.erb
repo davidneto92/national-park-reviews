@@ -1,0 +1,20 @@
+<h1>Edit Account Information</h1>
+
+<%= form_for(@user) do |f| %>
+  <%= f.label :display_name, "Display Name" %>
+    <em> (Leave blank to remove)</em><br>
+  <%= f.text_field :display_name %><br><br>
+
+  <%= f.label :avatar, "User Avatar" %><em> (Max size: 500kb)</em><br>
+  <%= f.file_field :avatar %><br>
+  <%= f.label :remove_avatar, "Remove avatar?" %>
+  <%= f.check_box :remove_avatar %><br>
+    <% if f.object.avatar? && @user.errors.empty? %>
+    <%= image_tag f.object.avatar.thumb.url %>
+  <% end %>
+
+  <br><br>
+
+  <%= f.submit 'Submit' %>
+
+<% end %>

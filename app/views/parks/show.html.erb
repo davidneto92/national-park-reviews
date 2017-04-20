@@ -1,10 +1,16 @@
-<h1>Look at all of this information!</h1>
-
+<% if !current_user.nil? %>
   <% if current_user.id == @park.user_id || current_user.admin? %>
-    <%= link_to "Edit Park", edit_park_path(@park) %><br>
+    <br><%= link_to "Edit Park", edit_park_path(@park) %><br>
   <% end %>
+<% end %>
 
-<h3><%= @park.name %></h3>
+<h1><%= @park.name %></h1>
+<% @test_link %>
+
+<% if user_signed_in? %>
+  <h3>Submitted by <%= link_to "#{@creator_name}", user_path(@park.user) %></h3>
+<% end %>
+
 <ul>
   <li>Location: <%= @state[0] %></li>
   <% if !@park.year_founded.nil? %>

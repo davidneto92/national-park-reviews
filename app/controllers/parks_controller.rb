@@ -1,4 +1,7 @@
 class ParksController < ApplicationController
+  # before_action :authorize_user, except: [:index, :show]
+  # before_action :authorize_edit
+
   def index
     @parks = Park.all
   end
@@ -6,6 +9,11 @@ class ParksController < ApplicationController
   def show
     @park = Park.find(params[:id])
     @state = Park::STATES.find { |state| state.include?(@park.state) }
+    if @park.user.display_name.nil?
+      @creator_name = @park.user.email
+    else
+      @creator_name = @park.user.display_name
+    end
   end
 
   def new
@@ -56,4 +64,16 @@ class ParksController < ApplicationController
       :area_miles
     )
   end
+
+  # def authorize_user
+  #   # binding.pry
+  #   if !user_signed_in? || !current_user.admin?
+  #     raise ActionController::RoutingError.new("Not Found")
+  #   end
+  # end
+
+  def authorize_login
+
+  end
+
 end
