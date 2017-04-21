@@ -1,6 +1,20 @@
 require "rails_helper"
 
 feature "users must be signed in to user information" do
+  scenario "standard users cannot view the user index" do
+    user_01 = FactoryGirl.create(:user)
+    user_02 = FactoryGirl.create(:user)
+    user_03 = FactoryGirl.create(:user)
+
+    login_as(user_01)
+    visit "/users"
+    
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+    expect(page).to_not have_link("#{user_01.email}")
+    expect(page).to_not have_link("#{user_02.email}")
+    expect(page).to_not have_link("#{user_03.email}")
+  end
+
   scenario "users must be signed in to view any user's information" do
     user_01 = FactoryGirl.create(:user)
     user_02 = FactoryGirl.create(:user)
@@ -8,6 +22,7 @@ feature "users must be signed in to user information" do
     visit "/users/#{user_01.id}"
     expect(page).to have_content("The page you were looking for doesn't exist.")
     expect(page).to_not have_content("#{user_01.email}")
+
     visit "/users/#{user_02.id}"
     expect(page).to have_content("The page you were looking for doesn't exist.")
     expect(page).to_not have_content("#{user_02.email}")
