@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authorize_user
-  before_action :authorize_edit, only: [:edit, :update]
+  before_action :authorize_sign_in
+  before_action :authorize_admin, only: [:index]
+  before_action :authorize_edit, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -39,17 +40,21 @@ class UsersController < ApplicationController
     )
   end
 
-  def authorize_user
+  def authorize_sign_in
     if !user_signed_in?
       render file: "#{Rails.root}/public/404.html", layout: false, status: 404
     end
   end
 
+  def authorize_admin
+    if !current_user.admin?
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
+  end
+
   def authorize_edit
-    if current_user
-      if current_user.id != params[:id].to_i
-        render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-      end
+    if !current_user.admin? && current_user.id != params[:id].to_i
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
     end
   end
 

@@ -39,6 +39,7 @@ RSpec.configure do |config|
     if Rails.env.test? || Rails.env.cucumber?
       FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/*"])
     end
+    logout # necessary to prevent sign in issues
   end
 
   # Databse Cleaning block to remove entries after each feature test

@@ -1,6 +1,5 @@
 class ParksController < ApplicationController
-  # before_action :authorize_user, except: [:index, :show]
-  # before_action :authorize_edit
+  before_action :authorize_edit, only: [:edit, :update, :destroy]
 
   def index
     @parks = Park.all
@@ -27,7 +26,7 @@ class ParksController < ApplicationController
   end
 
   def create
-    @park = Park.new(new_park_params)
+    @park = Park.new(park_params)
     @park.user_id = current_user.id
 
     if @park.save
@@ -43,7 +42,7 @@ class ParksController < ApplicationController
   def update
     @park = Park.find(params[:id])
 
-    if @park.update(new_park_params)
+    if @park.update(park_params)
       flash[:notice] = "#{@park.name} updated."
       redirect_to park_path(@park)
     else
@@ -55,7 +54,7 @@ class ParksController < ApplicationController
 
   private
 
-  def new_park_params
+  def park_params
     params.require(:park).permit(
       :name,
       :main_image,
@@ -65,15 +64,14 @@ class ParksController < ApplicationController
     )
   end
 
-  # def authorize_user
-  #   # binding.pry
-  #   if !user_signed_in? || !current_user.admin?
-  #     raise ActionController::RoutingError.new("Not Found")
-  #   end
-  # end
-
-  def authorize_login
-
+  def authorize_edit
+    if current_user
+      if current_user.id != Park.find(params[:id]).user_id && !current_user.admin?
+        render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+      end
+    else
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
   end
 
 end
