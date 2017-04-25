@@ -3,8 +3,8 @@ require "rails_helper"
 feature "users can view park(s)" do
   scenario "signed in users can view index page that lists all parks" do
     user = FactoryGirl.create(:user)
-    park_01 = FactoryGirl.create(:park, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
-    park_02 = FactoryGirl.create(:park, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_02.jpg'))))
+    park_01 = FactoryGirl.create(:park, user_id: user.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
+    park_02 = FactoryGirl.create(:park, user_id: user.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_02.jpg'))))
 
     visit "/"
     click_link "Sign in"
@@ -22,8 +22,8 @@ feature "users can view park(s)" do
 
   scenario "non-signed in users can view index page that lists all parks" do
     user = FactoryGirl.create(:user)
-    park_01 = FactoryGirl.create(:park, user_id: 2, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
-    park_02 = FactoryGirl.create(:park, user_id: 2, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_02.jpg'))))
+    park_01 = FactoryGirl.create(:park, user_id: user.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
+    park_02 = FactoryGirl.create(:park, user_id: user.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_02.jpg'))))
 
     visit "/"
 
@@ -37,12 +37,10 @@ feature "users can view park(s)" do
 
   scenario "index page links to each show page for each displayed park" do
     user = FactoryGirl.create(:user)
-    park_01 = FactoryGirl.create(:park, user_id: 3, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
+    park_01 = FactoryGirl.create(:park, user_id: user.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
 
     visit "/"
 
     expect(page).to have_link(park_01.name)
   end
-
-  pending "park index is paginated" # to be added
 end

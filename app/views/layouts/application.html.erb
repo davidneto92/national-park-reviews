@@ -20,6 +20,12 @@
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>
       <%= link_to "Sign up", new_user_registration_path %>
+    <% end %><br><br>
+
+    <%= form_tag(parks_path, method: "get") do %>
+      <%= label_tag(:search_terms, "Search Parks:") %>
+      <%= text_field_tag(:search_terms) %>
+      <%= submit_tag("Search") %>
     <% end %>
 
     <%= yield %>
