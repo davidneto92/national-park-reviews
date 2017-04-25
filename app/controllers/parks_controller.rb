@@ -2,19 +2,21 @@ class ParksController < ApplicationController
   before_action :authorize_edit, only: [:edit, :update, :destroy]
 
   def index
-    @parks = Park.all
+    @parks = Park.order(:id).page params[:page]
   end
 
   def show
     @park = Park.find(params[:id])
     @state = Park::STATES.find { |state| state.include?(@park.state) }
+
     # need to update this logic to account for spaces, may need to
-    # just add regex validation to prevent spaces
+    # add regex validation to prevent spaces
     if @park.user.display_name.nil? || @park.user.display_name == ""
       @creator_name = @park.user.email
     else
       @creator_name = @park.user.display_name
     end
+
     @reviews = Review.where(park_id: params[:id]).order('created_at DESC')
   end
 

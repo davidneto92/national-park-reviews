@@ -11,7 +11,8 @@ User.create(email: "test_email_02@email.com", password: "password")
 User.create(email: "test_email_03@email.com", password: "password")
 User.create(email: "test_email_04@email.com", password: "password", role: "admin")
 
-# Park.create(name: "Park 01", main_image: "default_park.jpg", state: "MA", user_id: 1)
-# Park.create(name: "Park 02", main_image: "default_park.jpg", state: "RI", user_id: 2)
-# Park.create(name: "Park 03", main_image: "default_park.jpg", state: "CT", user_id: 2)
-# Park.create(name: "Park 04", main_image: "default_park.jpg", state: "MA", user_id: 4)
+for x in 0..15
+  Park.create(name: "Park #{x + 1}", state: ["MA","RI","NH","ME"].sample,
+  user_id: (rand(4) + 1),
+  main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
+end
