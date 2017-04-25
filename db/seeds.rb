@@ -12,7 +12,7 @@ User.create(email: "test_email_03@email.com", password: "password")
 User.create(email: "test_email_04@email.com", password: "password", role: "admin")
 
 for x in 0..15
-  Park.create(name: "Park #{x + 1}", state: ["MA","RI","NH","ME"].sample,
+  Park.create(name: "Park #{x + 1}", state: ["Massachusetts","Rhode Island","New Hampshire","Maine"].sample,
   user_id: (rand(4) + 1),
   main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
 end

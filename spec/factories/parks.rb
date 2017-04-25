@@ -1,14 +1,8 @@
 FactoryGirl.define do
   factory :park do
-    sequence(:name) { |n| "National Park #{n}" }
+    sequence(:name) { |n| "National Park 0#{n}" }
     main_image Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg')))
-    state "SD"
+    state "South Dakota"
     user_id 1
-    
-    # This block was causing the uploaded image to always be mountains_01.jpg.
-    # Not sure what to do with it, but for now my tests are working.
-    # after :create do |b|
-    #   b.update_column(:main_image, "#{Rails.root}/spec/support/mountains_01.jpg")
-    # end
   end
 end

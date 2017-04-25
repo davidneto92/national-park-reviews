@@ -8,13 +8,13 @@ class ParksController < ApplicationController
         flash.now[:notice] = "No results found for #{params[:search_terms]}."
       end
     else
-      @parks = Park.order(:id).page params[:page]
+      @parks = Park.order("name").page params[:page]
     end
   end
 
   def show
     @park = Park.find(params[:id])
-    @state = Park::STATES.find { |state| state.include?(@park.state) }
+    # @state = Park::STATES.find { |state| state.include?(@park.state) }
 
     # need to update this logic to account for spaces, may need to
     # add regex validation to prevent spaces
