@@ -2,7 +2,14 @@ class ParksController < ApplicationController
   before_action :authorize_edit, only: [:edit, :update, :destroy]
 
   def index
-    @parks = Park.order(:id).page params[:page]
+    if params[:search_terms]
+      @parks = Park.fuzzy_search(params[:search_terms]).page params[:page]
+      if Park.fuzzy_search(params[:search_terms]).empty?
+        flash.now[:notice] = "No results found for #{params[:search_terms]}."
+      end
+    else
+      @parks = Park.order(:id).page params[:page]
+    end
   end
 
   def show
@@ -66,13 +73,7 @@ class ParksController < ApplicationController
   private
 
   def park_params
-    params.require(:park).permit(
-      :name,
-      :main_image,
-      :state,
-      :year_founded,
-      :area_miles
-    )
+    params.require(:park).permit(:name, :main_image, :state, :year_founded, :area_miles)
   end
 
   def authorize_edit

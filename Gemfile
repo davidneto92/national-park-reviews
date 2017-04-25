@@ -12,6 +12,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'figaro'
 gem 'kaminari'
+gem 'textacular'
 
 group :development do
   gem 'listen', '~> 3.0.5'
