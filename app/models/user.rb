@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validate :avatar_size_validation
 
   has_many :parks
+  has_many :reviews
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 

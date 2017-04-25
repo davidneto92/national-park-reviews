@@ -24,3 +24,13 @@
     <li><%= link_to "#{park.name}", park_path(park) %></li>
   <% end %>
 </ul>
+
+<h3>Reviewed Parks</h3>
+<ul>
+  <% @reviews.each do |review| %>
+    <li>
+      <%= link_to "#{review.park.name}", park_path(review.park) %><br>
+      <%= review.title %>
+    </li>
+  <% end %>
+</ul>
