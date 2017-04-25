@@ -22,3 +22,37 @@
 </ul>
 
 <%= image_tag @park.main_image.url %>
+
+<% if user_signed_in? %>
+  <br><br><%= link_to "Write a Review", new_park_review_path(@park) %>
+  <% end %>
+
+<h3>Member Reviews</h3>
+
+<ul>
+  <% @reviews.each do |review| %>
+    <li>
+      <strong><%= review.title %></strong><br>
+
+      <% if !current_user.nil? %>
+        <% if current_user.admin? || current_user.reviews.include?(review) %>
+          <%= link_to "Edit Review", edit_park_review_path(@park, review) %><br>
+          <%= link_to "Delete Review", [@park, review],
+             method: :delete, data: { confirm: "Are you sure you want to delete the following review:\n #{review.title}" } %><br>
+        <% end %>
+      <% end %>
+
+      <%= image_tag review.user.avatar.thumb %><br>
+      <% if user_signed_in? %>
+        <% if review.user.display_name.nil? || review.user.display_name == "" %>
+            By: <%= link_to "#{review.user.email}", user_path(review.user) %>
+          <% else %>
+            By: <%= link_to "#{review.user.display_name}", user_path(review.user) %>
+        <% end %>
+      <% end %>
+      <%= review.created_at.strftime "posted at %m/%d/%Y" %><br>
+      <%= review.visit_date.strftime "Date of Visit: %m/%d/%Y" %><br>
+      <%= review.body %><br>
+    </li><br>
+  <% end %>
+<ul>

@@ -8,11 +8,14 @@ class ParksController < ApplicationController
   def show
     @park = Park.find(params[:id])
     @state = Park::STATES.find { |state| state.include?(@park.state) }
-    if @park.user.display_name.nil?
+    # need to update this logic to account for spaces, may need to
+    # just add regex validation to prevent spaces
+    if @park.user.display_name.nil? || @park.user.display_name == ""
       @creator_name = @park.user.email
     else
       @creator_name = @park.user.display_name
     end
+    @reviews = Review.where(park_id: params[:id]).order('created_at DESC')
   end
 
   def new
@@ -50,6 +53,12 @@ class ParksController < ApplicationController
       @state_collection = Park::STATES
       render :edit
     end
+  end
+
+  def destroy
+    @park = Park.find(params[:id])
+    @park.destroy
+    redirect_to parks_path
   end
 
   private
