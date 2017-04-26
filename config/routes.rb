@@ -12,4 +12,11 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  # resources :park_votes
+
+  resources :parks do
+    post 'upvote'
+    post 'downvote'
+  end
+
 end

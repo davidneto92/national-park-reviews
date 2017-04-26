@@ -21,15 +21,21 @@
   <% end %>
 </ul>
 
-<%= image_tag @park.main_image.url %>
+
+<%= image_tag @park.main_image.url %><br>
+
+<p>Park Score: <%= @park.calculate_score %></p>
+<% if !current_user.nil? %>
+  <%= render 'park_votes/vote_buttons' %>
+<% end %>
 
 <% if user_signed_in? %>
   <br><br><%= link_to "Write a Review", new_park_review_path(@park) %>
-  <% end %>
+<% end %>
 
-<h3>Member Reviews</h3>
 
 <ul>
+  <h3>Member Reviews</h3>
   <% @reviews.each do |review| %>
     <li>
       <strong><%= review.title %></strong><br>

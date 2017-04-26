@@ -1,4 +1,5 @@
 class ParksController < ApplicationController
+  before_action :authorize_sign_in, only: [:upvote, :downvote]
   before_action :authorize_edit, only: [:edit, :update, :destroy]
 
   def index
@@ -70,10 +71,52 @@ class ParksController < ApplicationController
     redirect_to parks_path
   end
 
+  def upvote
+    @park = Park.find(params[:park_id])
+    @vote = ParkVote.where(park_id: params[:park_id], user_id: current_user.id)[0]
+
+    if @vote.nil?
+      ParkVote.create(choice: 1, park_id: @park.id, user_id: current_user.id)
+      redirect_to park_path(@park)
+    elsif @vote.choice == 1
+      @vote.choice = 0
+      @vote.save
+      redirect_to park_path(@park)
+    else
+      @vote.choice = 1
+      @vote.save
+      redirect_to park_path(@park)
+    end
+  end
+
+  def downvote
+    @park = Park.find(params[:park_id])
+    @vote = ParkVote.where(park_id: params[:park_id], user_id: current_user.id)[0]
+
+    if @vote.nil?
+      ParkVote.create(choice: -1, park_id: @park.id, user_id: current_user.id)
+      redirect_to park_path(@park)
+    elsif @vote.choice == -1
+      @vote.choice = 0
+      @vote.save
+      redirect_to park_path(@park)
+    else
+      @vote.choice = -1
+      @vote.save
+      redirect_to park_path(@park)
+    end
+  end
+
   private
 
   def park_params
     params.require(:park).permit(:name, :main_image, :state, :year_founded, :area_miles)
+  end
+
+  def authorize_sign_in
+    if !user_signed_in?
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
   end
 
   def authorize_edit

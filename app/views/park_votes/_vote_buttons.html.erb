@@ -1,0 +1,5 @@
+<p>
+  Your rating:
+  <%= link_to "⇑", park_upvote_path(@park), method: :post %> -
+  <%= link_to "⇓", park_downvote_path(@park), method: :post %>
+</p>

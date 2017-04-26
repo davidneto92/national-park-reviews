@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425185115) do
+ActiveRecord::Schema.define(version: 20170426152113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "park_votes", force: :cascade do |t|
+    t.integer  "choice"
+    t.integer  "park_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["park_id"], name: "index_park_votes_on_park_id", using: :btree
+    t.index ["user_id"], name: "index_park_votes_on_user_id", using: :btree
+  end
 
   create_table "parks", force: :cascade do |t|
     t.string   "name",                     null: false
@@ -32,10 +42,10 @@ ActiveRecord::Schema.define(version: 20170425185115) do
   create_table "reviews", force: :cascade do |t|
     t.text     "title",                  null: false
     t.string   "body",                   null: false
-    t.datetime "visit_date"
+    t.date     "visit_date"
     t.integer  "vote_score", default: 0
-    t.integer  "user_id"
     t.integer  "park_id"
+    t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["park_id"], name: "index_reviews_on_park_id", using: :btree
@@ -45,7 +55,7 @@ ActiveRecord::Schema.define(version: 20170425185115) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",       null: false
     t.string   "encrypted_password",     default: "",       null: false
-    t.string   "display_name"
+    t.string   "display_name",           default: ""
     t.string   "role",                   default: "member"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -61,6 +71,8 @@ ActiveRecord::Schema.define(version: 20170425185115) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "park_votes", "parks"
+  add_foreign_key "park_votes", "users"
   add_foreign_key "parks", "users"
   add_foreign_key "reviews", "parks"
   add_foreign_key "reviews", "users"
