@@ -3,6 +3,7 @@ class Park < ApplicationRecord
 
   belongs_to :user
   has_many :reviews
+  has_many :park_votes
 
   validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true
@@ -114,5 +115,13 @@ class Park < ApplicationRecord
     "WY",
     "USA",
   ]
+
+  def calculate_score
+    if !self.park_votes.empty?
+      return self.park_votes.inject(0){|sum, vote| sum + vote.choice }
+    else
+      return 0
+    end
+  end
 
 end
