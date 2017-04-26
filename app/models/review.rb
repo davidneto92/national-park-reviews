@@ -9,7 +9,7 @@ class Review < ApplicationRecord
   private
 
   def visit_date_has_happened
-    if (self.visit_date.to_i) > Time.now.to_i
+    if (self.visit_date.to_time.to_i) > Time.now.to_i
       errors.add("Visit date", "cannot be in the future.")
     end
   end
