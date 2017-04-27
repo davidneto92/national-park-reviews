@@ -22,11 +22,13 @@ Rails.application.routes.draw do
     post 'downvote'
   end
 
-  # resources :parks do
-  #   resources :reviews do
-  #     post 'upvote'
-  #     post 'downvote'
-  #   end
-  # end
-  
+  namespace :api do
+    namespace :v1 do
+      resources :reviews do
+        post 'upvote'
+        post 'downvote'
+      end
+    end
+  end
+
 end

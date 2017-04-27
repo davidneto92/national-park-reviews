@@ -38,11 +38,10 @@
     <!-- End Top Bar -->
 
 
-    <% if flash[:notice] %>
+    <% if flash[:notice] || flash[:alert] %>
       <div class="callout">
-        <h5>This is a callout.</h5>
-        <p><% notice %></p>
-        <p><% alert %></p>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
       </div>
     <% end %>
 

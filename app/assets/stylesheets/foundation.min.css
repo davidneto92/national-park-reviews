@@ -8,11 +8,11 @@
 }
 
 .upvote {
-  color: red;
+  color: green;
 }
 
 .downvote {
-
+  color: red;
 }
 
 @charset "UTF-8";

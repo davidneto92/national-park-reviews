@@ -1,6 +1,5 @@
 require "rails_helper"
 
-# these tests may be removed and added to a separate branch for voting
 feature "signed in users can vote on a review" do
 
   scenario "signed in user can upvote a review" do
