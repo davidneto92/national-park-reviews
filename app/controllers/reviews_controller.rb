@@ -47,6 +47,42 @@ class ReviewsController < ApplicationController
     redirect_to park_path(@park)
   end
 
+  def upvote
+    @review = Review.find(params[:review_id])
+    @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
+
+    if @vote.nil?
+      ReviewVote.create(choice: 1, review_id: @review.id, user_id: current_user.id)
+      redirect_to park_path(@review.park)
+    elsif @vote.choice == 1
+      @vote.choice = 0
+      @vote.save
+      redirect_to park_path(@review.park)
+    else
+      @vote.choice = 1
+      @vote.save
+      redirect_to park_path(@review.park)
+    end
+  end
+
+  def downvote
+    @review = Review.find(params[:review_id])
+    @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
+
+    if @vote.nil?
+      ReviewVote.create(choice: -1, review_id: @review.id, user_id: current_user.id)
+      redirect_to park_path(@review.park)
+    elsif @vote.choice == -1
+      @vote.choice = 0
+      @vote.save
+      redirect_to park_path(@review.park)
+    else
+      @vote.choice = -1
+      @vote.save
+      redirect_to park_path(@review.park)
+    end
+  end
+
   private
 
   def review_params
