@@ -48,7 +48,7 @@
         <% end %>
       <% end %>
 
-      <%= image_tag review.user.avatar.thumb %><br>
+      <%= image_tag review.user.avatar, class: "review-avatar-thumb" %><br>
       <% if user_signed_in? %>
         <% if review.user.display_name.nil? || review.user.display_name == "" %>
             By: <%= link_to "#{review.user.email}", user_path(review.user) %>
@@ -63,8 +63,8 @@
       <p>
         Review Score: <%= review.calculate_score %><br>
         Review rating:
-        <%= link_to "⇑", review_upvote_path(review), method: :post %> -
-        <%= link_to "⇓", review_downvote_path(review), method: :post %>
+        <%= link_to "⇑", review_upvote_path(review), method: :post, class: "vote-arrow" %> -
+        <%= link_to "⇓", review_downvote_path(review), method: :post, class: "vote-arrow" %>
       </p>
 
     </li><br>

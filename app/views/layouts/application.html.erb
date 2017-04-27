@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>National Parks Review</title>
     <link rel="shortcut icon" href="https://s3.amazonaws.com/national-park-reviews-development/my_site.ico">
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
-    <% if signed_in? %>
-      <%= link_to "#{current_user.email}", user_path(current_user) %> |
-      <%= link_to "Add a Park", new_park_path %> |
-      <%= link_to "Sign out", destroy_user_session_path, data: { method: 'delete' } %>
-    <% else %>
-      <%= link_to "Sign in", new_user_session_path %>
-      <%= link_to "Sign up", new_user_registration_path %>
-    <% end %><br><br>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">Park Ratings</li>
+        </ul>
+      </div>
+
+      <div class="top-bar-right">
+        <ul class="menu">
+          <% if signed_in? %>
+            <%= link_to "#{current_user.email}", user_path(current_user) %> |
+            <%= link_to "Add a Park", new_park_path %> |
+            <%= link_to "Sign out", destroy_user_session_path, data: { method: 'delete' } %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path %>
+            <%= link_to "Sign up", new_user_registration_path %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Bar -->
+
+
+    <% if flash[:notice] %>
+      <div class="callout">
+        <h5>This is a callout.</h5>
+        <p><% notice %></p>
+        <p><% alert %></p>
+      </div>
+    <% end %>
 
     <%= form_tag(parks_path, method: "get") do %>
       <%= label_tag(:search_terms, "Search Parks:") %>
@@ -28,6 +52,11 @@
       <%= submit_tag("Search") %>
     <% end %>
 
-    <%= yield %>
+    <div class="row" id="content">
+      <div class="medium-8 columns">
+        <%= yield %>
+      </div>
+    </div>
+
   </body>
 </html>
