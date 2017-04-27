@@ -59,6 +59,14 @@
       <%= review.created_at.strftime "posted at %m/%d/%Y" %><br>
       <%= review.visit_date.strftime "Date of Visit: %m/%d/%Y" %><br>
       <%= review.body %><br>
+
+      <p>
+        Review Score: <%= review.calculate_score %><br>
+        Review rating:
+        <%= link_to "⇑", review_upvote_path(review), method: :post %> -
+        <%= link_to "⇓", review_downvote_path(review), method: :post %>
+      </p>
+
     </li><br>
   <% end %>
 <ul>

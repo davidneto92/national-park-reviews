@@ -15,7 +15,7 @@ feature "signed in users can vote on park" do
     expect(page).to have_content("Your rating")
     expect(page).to have_link("⇓")
 
-    click_link("⇑")
+    all("a", :text => "⇑")[0].click
 
     expect(Park.last.calculate_score).to eq(1)
     expect(Park.last.calculate_score).to_not eq(0)
@@ -31,7 +31,7 @@ feature "signed in users can vote on park" do
 
     expect(Park.last.calculate_score).to eq(0)
 
-    click_link("⇓")
+    all("a", :text => "⇓")[0].click
 
     expect(Park.last.calculate_score).to eq(-1)
     expect(Park.last.calculate_score).to_not eq(0)
@@ -45,10 +45,10 @@ feature "signed in users can vote on park" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    click_link("⇑")
+    all("a", :text => "⇑")[0].click
     expect(Park.last.calculate_score).to eq(1)
 
-    click_link("⇑")
+    all("a", :text => "⇑")[0].click
     expect(Park.last.calculate_score).to eq(0)
   end
 
@@ -60,10 +60,10 @@ feature "signed in users can vote on park" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    click_link("⇓")
+    all("a", :text => "⇓")[0].click
     expect(Park.last.calculate_score).to eq(-1)
 
-    click_link("⇓")
+    all("a", :text => "⇓")[0].click
     expect(Park.last.calculate_score).to eq(0)
   end
 
@@ -75,10 +75,10 @@ feature "signed in users can vote on park" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    click_link("⇑")
+    all("a", :text => "⇑")[0].click
     expect(Park.last.calculate_score).to eq(1)
 
-    click_link("⇓")
+    all("a", :text => "⇓")[0].click
     expect(Park.last.calculate_score).to eq(-1)
   end
 
@@ -90,10 +90,10 @@ feature "signed in users can vote on park" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    click_link("⇓")
+    all("a", :text => "⇓")[0].click
     expect(Park.last.calculate_score).to eq(-1)
 
-    click_link("⇑")
+    all("a", :text => "⇑")[0].click
     expect(Park.last.calculate_score).to eq(1)
   end
 

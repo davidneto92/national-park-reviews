@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :parks
   has_many :reviews
   has_many :park_votes
+  has_many :review_votes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
