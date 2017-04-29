@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       resources :review_votes do
         post 'upvote'
         post 'downvote'
-        patch 'upvote'
+        # patch 'upvote'
       end
     end
   end

@@ -72,8 +72,8 @@
         <p id="review_score_<%=  "#{review.id}" %>" ><%= review.calculate_score %></p>
         <p>
           Review rating:
-          <%= link_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow", id: "upvote_#{review.id}", review_id: "#{review.id}" %> -
-          <%= link_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow", id: "downvote_#{review.id}", review_id: "#{review.id}" %>
+          <%= button_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow", id: "upvote_#{review.id}", review_id: "#{review.id}" %> -
+          <%= button_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow", id: "downvote_#{review.id}", review_id: "#{review.id}" %>
         </p>
     </div>
 
