@@ -4,6 +4,7 @@ class Park < ApplicationRecord
   belongs_to :user
   has_many :reviews
   has_many :park_votes
+  has_many :review_votes
 
   validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true

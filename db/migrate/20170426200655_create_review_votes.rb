@@ -4,6 +4,7 @@ class CreateReviewVotes < ActiveRecord::Migration[5.0]
       t.integer :choice
       # range is -1, 0, 1
 
+      t.references :park, foreign_key: true
       t.references :review, foreign_key: true
       t.references :user, foreign_key: true
 

@@ -33,6 +33,13 @@
   <br><br><%= link_to "Write a Review", new_park_review_path(@park) %>
 <% end %>
 
+<% if user_signed_in? %>
+  <%= javascript_tag do %>
+    window.user_id = <%= current_user.id %>;
+    window.park_id = <%= @park.id %>;
+    window.review_id_list = <%= @review_id_list %>;
+  <% end %>
+<% end %>
 
 <ul>
   <h3>Member Reviews</h3>
@@ -48,7 +55,7 @@
         <% end %>
       <% end %>
 
-      <%= image_tag review.user.avatar.thumb %><br>
+      <%= image_tag review.user.avatar, class: "review-avatar-thumb" %><br>
       <% if user_signed_in? %>
         <% if review.user.display_name.nil? || review.user.display_name == "" %>
             By: <%= link_to "#{review.user.email}", user_path(review.user) %>
@@ -58,14 +65,17 @@
       <% end %>
       <%= review.created_at.strftime "posted at %m/%d/%Y" %><br>
       <%= review.visit_date.strftime "Date of Visit: %m/%d/%Y" %><br>
-      <%= review.body %><br>
+      <%= review.body %><br><br>
 
-      <p>
-        Review Score: <%= review.calculate_score %><br>
-        Review rating:
-        <%= link_to "⇑", review_upvote_path(review), method: :post %> -
-        <%= link_to "⇓", review_downvote_path(review), method: :post %>
-      </p>
+      <div class="review_score" >
+        Review Score:
+        <p id="review_score_<%=  "#{review.id}" %>" ><%= review.calculate_score %></p>
+        <p>
+          Review rating:
+          <%= link_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow", id: "upvote_#{review.id}", review_id: "#{review.id}" %> -
+          <%= link_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow", id: "downvote_#{review.id}", review_id: "#{review.id}" %>
+        </p>
+    </div>
 
     </li><br>
   <% end %>

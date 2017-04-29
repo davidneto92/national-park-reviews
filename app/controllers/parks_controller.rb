@@ -26,6 +26,7 @@ class ParksController < ApplicationController
     end
 
     @reviews = Review.where(park_id: params[:id]).order('created_at DESC')
+    @review_id_list = @reviews.map { |review| review.id }
   end
 
   def new

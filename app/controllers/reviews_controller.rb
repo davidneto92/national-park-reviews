@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authorize_sign_in
   before_action :authorize_edit, only: [:edit, :update, :destroy]
+  respond_to :html, :js
 
   def new
     @park = Park.find(params[:park_id])
@@ -48,11 +49,12 @@ class ReviewsController < ApplicationController
   end
 
   def upvote
+    sleep 1
     @review = Review.find(params[:review_id])
     @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
 
     if @vote.nil?
-      ReviewVote.create(choice: 1, review_id: @review.id, user_id: current_user.id)
+      ReviewVote.create(choice: 1, review_id: @review.id, user_id: current_user.id, park_id: @review.park.id)
       redirect_to park_path(@review.park)
     elsif @vote.choice == 1
       @vote.choice = 0
@@ -66,11 +68,12 @@ class ReviewsController < ApplicationController
   end
 
   def downvote
+    sleep 1
     @review = Review.find(params[:review_id])
     @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
 
     if @vote.nil?
-      ReviewVote.create(choice: -1, review_id: @review.id, user_id: current_user.id)
+      ReviewVote.create(choice: -1, review_id: @review.id, user_id: current_user.id, park_id: @review.park.id)
       redirect_to park_path(@review.park)
     elsif @vote.choice == -1
       @vote.choice = 0
