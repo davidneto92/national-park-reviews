@@ -13,6 +13,7 @@ gem 'fog'
 gem 'figaro'
 gem 'kaminari'
 gem 'textacular'
+gem 'coffee-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'

@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   root 'parks#index'
 
-  # get 'secret' => 'pages#secret'
-
   resources :users
 
   resources :parks do
@@ -24,9 +22,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :reviews do
+      resources :review_votes do
         post 'upvote'
         post 'downvote'
+        patch 'upvote'
       end
     end
   end

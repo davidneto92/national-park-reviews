@@ -3,7 +3,12 @@
   width: 150px
 }
 
-.vote-arrow {
+.upvote-arrow {
+  font-weight: bold;
+}
+
+
+.downvote-arrow {
   font-weight: bold;
 }
 
@@ -11,7 +16,15 @@
   color: green;
 }
 
+.upvote:hover {
+  color: green;
+}
+
 .downvote {
+  color: red;
+}
+
+.downvote:hover {
   color: red;
 }
 
