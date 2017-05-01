@@ -1,4 +1,44 @@
-<%= render 'full_park_info' %>
+<% if !current_user.nil? %>
+  <% if current_user.id == @park.user_id || current_user.admin? %>
+    <br><%= link_to "Edit Park", edit_park_path(@park) %><br>
+  <% end %>
+<% end %>
+
+<h1><%= @park.name %></h1>
+
+<% if user_signed_in? %>
+  <h3>Submitted by <%= link_to "#{@creator_name}", user_path(@park.user) %></h3>
+<% end %>
+
+<ul>
+  <li>Location: <%= @park.state %></li>
+  <% if !@park.year_founded.nil? %>
+    <li>Year Founded: <%= @park.year_founded %></li>
+  <% end %>
+  <% if !@park.area_miles.nil? %>
+    <li>Area (sq. miles): <%= @park.area_miles %></li>
+  <% end %>
+</ul>
+
+
+<%= image_tag @park.main_image.url %><br>
+
+<p>Park Score: <%= @park.calculate_score %></p>
+<% if !current_user.nil? %>
+  <%= render 'park_votes/vote_buttons' %>
+<% end %>
+
+<% if user_signed_in? %>
+  <br><br><%= link_to "Write a Review", new_park_review_path(@park) %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= javascript_tag do %>
+    window.user_id = <%= current_user.id %>;
+    window.park_id = <%= @park.id %>;
+    window.review_id_list = <%= @review_id_list %>;
+  <% end %>
+<% end %>
 
 <ul class="reviews">
   <h3>Member Reviews</h3>

@@ -11,6 +11,7 @@ class ParksController < ApplicationController
     else
       @parks = Park.order("name").page params[:page]
     end
+    recent_data
   end
 
   def show
@@ -27,6 +28,7 @@ class ParksController < ApplicationController
 
     @reviews = Review.where(park_id: params[:id]).order('created_at DESC')
     @review_id_list = @reviews.map { |review| review.id }
+    recent_data
   end
 
   def new
