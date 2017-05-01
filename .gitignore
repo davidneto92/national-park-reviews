@@ -18,3 +18,7 @@
 
 # Ignore application configuration
 /config/application.yml
+
+/app/view/layouts/blog_template.html
+
+/app/views/pages/
