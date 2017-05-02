@@ -105,15 +105,14 @@ feature "signed in users can vote on a review" do
 
 
   scenario "Voting buttons do not creating review_votes if user isn't signed in" do
-
     user_01 = FactoryGirl.create(:user)
     park_01 = FactoryGirl.create(:park, user_id: user_01.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
     review_01 = FactoryGirl.create(:review, user_id: user_01.id, park_id: park_01.id)
 
     visit "/parks/#{park_01.id}"
 
-    click_button("⇑")
-    expect(ReviewVote.all.empty?).to eq(true)
+    expect(page).to_not have_button("⇑")
+    expect(page).to_not have_button("⇓")    
   end
 
 end
