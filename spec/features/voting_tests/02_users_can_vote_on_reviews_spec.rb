@@ -112,7 +112,7 @@ feature "signed in users can vote on a review" do
     visit "/parks/#{park_01.id}"
 
     expect(page).to_not have_button("⇑")
-    expect(page).to_not have_button("⇓")    
+    expect(page).to_not have_button("⇓")
   end
 
 end
