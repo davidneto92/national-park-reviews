@@ -111,7 +111,7 @@ $(function (){
         }
         // if vote doesn't exist, new vote created
         if (votes.find(checkVoteExists) === undefined) {
-          let newUpvote = {
+          let newDownvote = {
             choice: -1,
             park_id: window.park_id,
             review_id: event.target.getAttribute("review_id"),
@@ -122,7 +122,7 @@ $(function (){
           $.ajax({
             method: 'POST',
             url: '/api/v1/review_votes',
-            data: newUpvote,
+            data: newDownvote,
             success: function(newVote) {
               let current_score_id = ("#review_score_" + event.target.getAttribute("review_id"));
               $(current_score_id).load(`/parks/${window.park_id} ${current_score_id}`, function() { });
