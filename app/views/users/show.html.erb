@@ -1,22 +1,11 @@
-<h3>
-  <% if @user.display_name.nil? || @user.display_name == "" %>
-    <%= @user.email %>'s details</h3>
-  <% else %>
-    <%= @user.display_name %>'s details</h3>
-  <% end %>
-  <%= image_tag @user.avatar.thumb, class: "avatar-thumb" %><br>
+<h3><%= @user.display_name %>'s details</h3>
+<%= image_tag @user.avatar.thumb, class: "avatar-thumb" %><br>
+
 
 <% if current_user.id == @user.id || current_user.admin? %>
   <%= link_to "Manage Sign in Details", edit_user_registration_path %><br>
   <%= link_to "Edit Display Name and Avatar", edit_user_path(@user) %>
 <% end %>
-
-<p>Display Name:
-<% if @user.display_name.nil? || @user.display_name == "" %>
-  <%= "not set" %>
-<% else %>
-  <%= @user.display_name %>
-<% end %></p>
 
 <h3>Submitted Parks</h3>
 <ul>

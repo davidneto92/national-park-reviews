@@ -3,6 +3,9 @@ class User < ApplicationRecord
   validates_processing_of :avatar
   validate :avatar_size_validation
 
+  validates :display_name, length: { minimum: 5 }, uniqueness: true
+  validates :display_name, format: { with: /\A[a-zA-Z0-9\-_]{5,40}\Z/, message: "Only allows letters and numbers" }
+
   has_many :parks
   has_many :reviews
   has_many :park_votes
