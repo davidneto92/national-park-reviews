@@ -12,11 +12,11 @@ feature "signed in users can vote on a review" do
     visit "/parks/#{park_01.id}"
 
     expect(review_01.calculate_score).to eq(0)
-    expect(page).to have_link("⇑")
-    expect(page).to have_content("Review rating")
-    expect(page).to have_link("⇓")
+    expect(page).to have_button("⇑")
+    expect(page).to have_content("Review Score:")
+    expect(page).to have_button("⇓")
 
-    all("a", :text => "⇑")[1].click
+    click_button("⇑")
 
     expect(Review.last.calculate_score).to eq(1)
     expect(Review.last.calculate_score).to_not eq(0)
@@ -33,7 +33,7 @@ feature "signed in users can vote on a review" do
 
     expect(Review.last.calculate_score).to eq(0)
 
-    all("a", :text => "⇓")[1].click
+    click_button("⇓")
 
     expect(Review.last.calculate_score).to eq(-1)
     expect(Review.last.calculate_score).to_not eq(0)
@@ -48,10 +48,10 @@ feature "signed in users can vote on a review" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    all("a", :text => "⇑")[1].click
+    click_button("⇑")
     expect(Review.last.calculate_score).to eq(1)
 
-    all("a", :text => "⇑")[1].click
+    click_button("⇑")
     expect(Review.last.calculate_score).to eq(0)
   end
 
@@ -64,10 +64,10 @@ feature "signed in users can vote on a review" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    all("a", :text => "⇓")[1].click
+    click_button("⇓")
     expect(Review.last.calculate_score).to eq(-1)
 
-    all("a", :text => "⇓")[1].click
+    click_button("⇓")
     expect(Review.last.calculate_score).to eq(0)
   end
 
@@ -80,10 +80,10 @@ feature "signed in users can vote on a review" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    all("a", :text => "⇓")[1].click
+    click_button("⇓")
     expect(Review.last.calculate_score).to eq(-1)
 
-    all("a", :text => "⇑")[1].click
+    click_button("⇑")
     expect(Review.last.calculate_score).to eq(1)
   end
 
@@ -96,10 +96,10 @@ feature "signed in users can vote on a review" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    all("a", :text => "⇑")[1].click
+    click_button("⇑")
     expect(Review.last.calculate_score).to eq(1)
 
-    all("a", :text => "⇓")[1].click
+    click_button("⇓")
     expect(Review.last.calculate_score).to eq(-1)
   end
 
@@ -110,9 +110,9 @@ feature "signed in users can vote on a review" do
 
     visit "/parks/#{park_01.id}"
 
-    expect(page).to have_link("⇑")
-    expect(page).to have_content("Review rating")
-    expect(page).to have_link("⇓")
+    expect(page).to_not have_button("⇑")
+    expect(page).to_not have_content("Review rating")
+    expect(page).to_not have_button("⇓")
   end
 
 end

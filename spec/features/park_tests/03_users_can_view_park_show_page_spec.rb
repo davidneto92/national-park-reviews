@@ -8,12 +8,12 @@ feature "users can view a park\'s show page" do
     state_name = Park::STATES.find { |state| state.include?(park_01.state) }[0]
 
     visit "/"
-    click_link(park_01.name)
+    first(:link, "#{park_01.name}").click
 
     expect(page).to have_content(park_01.name)
-    expect(page).to have_content("Location: #{state_name}")
+    expect(page).to have_content("#{state_name}")
     expect(page).to have_content("Year Founded: #{park_01.year_founded}")
-    expect(page).to have_content("Area (sq. miles): #{park_01.area_miles}")
+    expect(page).to have_content("Area (miles2): #{park_01.area_miles}")
     expect(page).to have_css("img[src*='mountains_01.jpg']")
   end
 
@@ -26,7 +26,7 @@ feature "users can view a park\'s show page" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    expect(page).to have_content("Submitted by #{user_01.email}")
+    expect(page).to have_content("Submitted by: #{user_01.email}")
     expect(page).to have_link("#{user_01.email}")
   end
 
@@ -39,7 +39,7 @@ feature "users can view a park\'s show page" do
     login_as(user_02)
     visit "/parks/#{park_01.id}"
 
-    expect(page).to have_content("Submitted by #{user_01.display_name}")
+    expect(page).to have_content("Submitted by: #{user_01.display_name}")
     expect(page).to have_link("#{user_01.display_name}")
   end
 

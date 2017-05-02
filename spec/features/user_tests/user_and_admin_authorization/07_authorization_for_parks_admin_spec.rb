@@ -16,7 +16,7 @@ feature "admin accounts can edit park information" do
     click_button("Submit")
 
     expect(page).to have_content("NEW Park name")
-    expect(page).to have_content("Location: Hawaii")
+    expect(page).to have_content("Hawaii")
     expect(page).to have_css("img[src*='upload_test_picture.jpg']")
   end
 end

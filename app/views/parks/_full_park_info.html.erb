@@ -29,8 +29,12 @@
         <li>Area (miles<sup>2</sup>): <%= @park.area_miles %></li>
       <% end %>
     </ul>
+
+    <div>
+      <% if !current_user.nil? %>
+        Submitted by: <%= link_to "#{@creator_name}", user_path(@park.user) %>
+      <% end %>
+    </div>
   </div>
-
-
 
 </div>

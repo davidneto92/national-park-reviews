@@ -67,8 +67,8 @@ feature "users can view all reviews of parks" do
 
     visit "users/#{user_01.id}"
 
-    expect(page).to have_content("Reviewed Parks")
-    
+    expect(page).to have_content("Submitted Parks")
+
     expect(page).to have_link("#{park_01.name}")
     expect(page).to have_content("#{review_01.title}")
 

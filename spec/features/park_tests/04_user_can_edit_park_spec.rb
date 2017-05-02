@@ -12,7 +12,7 @@ feature "user can edit a park" do
     fill_in "Password", with: user.password
     click_on "Log in"
 
-    click_link(park_01.name)
+    first(:link, "#{park_01.name}").click
 
     click_link("Edit Park")
 
@@ -25,9 +25,9 @@ feature "user can edit a park" do
     click_button "Submit"
 
     expect(page).to have_content("the NEW park!")
-    expect(page).to have_content("Location: Idaho")
+    expect(page).to have_content("Idaho")
     expect(page).to have_content("Year Founded: 2017")
-    expect(page).to have_content("Area (sq. miles): 201")
+    expect(page).to have_content("Area (miles2): 201")
     expect(page).to have_css("img[src*='upload_test_picture.jpg']")
   end
 
@@ -45,7 +45,7 @@ feature "user can edit a park" do
     fill_in "Password", with: user_02.password
     click_on "Log in"
 
-    click_link(park_01.name)
+    first(:link, "#{park_01.name}").click
 
     expect(page).to_not have_link("Edit Park")
   end
