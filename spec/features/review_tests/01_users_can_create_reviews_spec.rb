@@ -19,7 +19,7 @@ feature "users can create reviews of parks" do
     click_button("Submit Review")
 
     expect(page).to have_content("Review created!")
-    expect(page).to have_content("By: #{user_02.email}")
+    expect(page).to have_content("By: #{user_02.display_name}")
     expect(page).to have_content("My review of the Park")
     expect(page).to have_content("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum eu dui at euismod. Nulla ac augue enim.")
     expect(page).to have_content("Date of Visit: 06/13/2014")

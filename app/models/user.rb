@@ -6,10 +6,10 @@ class User < ApplicationRecord
   validates :display_name, length: { minimum: 5 }, uniqueness: true
   validates :display_name, format: { with: /\A[a-zA-Z0-9\-_]{5,40}\Z/, message: "Only allows letters and numbers" }
 
-  has_many :parks
-  has_many :reviews
-  has_many :park_votes
-  has_many :review_votes
+  has_many :parks, :dependent => :delete_all
+  has_many :reviews, :dependent => :delete_all
+  has_many :park_votes, :dependent => :delete_all
+  has_many :review_votes, :dependent => :delete_all
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 

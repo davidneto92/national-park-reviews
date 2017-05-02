@@ -49,7 +49,6 @@ class ReviewsController < ApplicationController
   end
 
   def upvote
-    sleep 1
     @review = Review.find(params[:review_id])
     @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
 
@@ -68,7 +67,6 @@ class ReviewsController < ApplicationController
   end
 
   def downvote
-    sleep 1
     @review = Review.find(params[:review_id])
     @vote = ReviewVote.where(review_id: @review.id, user_id: current_user.id)[0]
 

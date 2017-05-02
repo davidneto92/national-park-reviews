@@ -8,7 +8,7 @@ feature "users must be signed in to user information" do
 
     login_as(user_01)
     visit "/users"
-    
+
     expect(page).to have_content("The page you were looking for doesn't exist.")
     expect(page).to_not have_link("#{user_01.email}")
     expect(page).to_not have_link("#{user_02.email}")
@@ -36,7 +36,7 @@ feature "users must be signed in to user information" do
     visit "/users/#{user_02.id}"
 
     expect(page).to_not have_content("Not authorized. Please sign in to view this user.")
-    expect(page).to have_content("#{user_02.email}")
+    expect(page).to have_content("#{user_02.display_name}")
   end
 
   scenario "user page lists links to given user's submitted parks" do

@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-  has_many :review_votes
+  has_many :review_votes, :dependent => :delete_all
   belongs_to :park
   belongs_to :user
 

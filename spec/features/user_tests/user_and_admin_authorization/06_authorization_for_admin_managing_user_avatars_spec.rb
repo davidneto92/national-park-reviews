@@ -7,7 +7,7 @@ feature "admin can manage a user's account avatar" do
     login_as(user_02)
     visit "/users/#{user_01.id}"
 
-    click_link("Edit Display Name and Avatar")
+    click_link("Administrator Management")
     attach_file("User Avatar", "#{Rails.root}/spec/support/test_avatar_acceptable.jpg")
     click_button("Submit")
 
@@ -24,7 +24,7 @@ feature "admin can manage a user's account avatar" do
 
     expect(page).to have_css("img[src*='test_avatar_acceptable.jpg']")
 
-    click_link("Edit Display Name and Avatar")
+    click_link("Administrator Management")
     check("Remove avatar?")
     click_button("Submit")
 

@@ -22,26 +22,11 @@ feature "admin accounts can edit user information" do
     login_as(user_02)
     visit "/users/#{user_01.id}"
 
-    click_link "Edit Display Name and Avatar"
-    fill_in "Display Name", with: "test name by admin"
+    click_link "Administrator Management"
+    fill_in "Display Name", with: "test_name_by_admin"
     click_button "Submit"
 
-    expect(page).to have_content("Display Name: test name by admin")
-  end
-
-  scenario "admin can remove the display name from an account" do
-    user_01 = FactoryGirl.create(:user, display_name: "Mountain_man")
-    user_02 = FactoryGirl.create(:user, role: "admin")
-    login_as(user_02)
-    visit "/users/#{user_01.id}"
-
-    expect(page).to have_content("Display Name: Mountain_man")
-
-    click_link "Edit Display Name and Avatar"
-    fill_in "Display Name", with: ""
-    click_button "Submit"
-
-    expect(page).to have_content("Display Name: not set")
+    expect(User.first.display_name).to eq("test_name_by_admin")
   end
 
 end

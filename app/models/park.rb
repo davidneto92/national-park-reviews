@@ -2,9 +2,9 @@ class Park < ApplicationRecord
   mount_uploader :main_image, ParkPictureUploader
 
   belongs_to :user
-  has_many :reviews
-  has_many :park_votes
-  has_many :review_votes
+  has_many :reviews, :dependent => :delete_all
+  has_many :park_votes, :dependent => :delete_all
+  has_many :review_votes, :dependent => :delete_all
 
   validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true

@@ -19,8 +19,8 @@ feature "park index page paginates listings" do
     expect(page).to have_link("#{park_04.name}")
     expect(page).to have_link("#{park_05.name}")
 
-    expect(page).to_not have_link("#{park_06.name}")
-    expect(page).to_not have_link("#{park_07.name}")
+    expect(page).to_not have_xpath("//div[.=index-display]/..", text: "#{park_06.name}")
+    expect(page).to_not have_xpath("//div[.=index-display]/..", text: "#{park_07.name}")
   end
 
   scenario "index shows remaining parks on subsequent pages, alphabetically" do

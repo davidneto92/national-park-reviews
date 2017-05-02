@@ -14,7 +14,7 @@ feature "users can manage their account avatar" do
     login_as(user_01)
     visit "/users/#{user_01.id}"
 
-    click_link("Edit Display Name and Avatar")
+    click_link("Modify User Avatar")
     attach_file("User Avatar", "#{Rails.root}/spec/support/test_avatar_acceptable.jpg")
     click_button("Submit")
 
@@ -28,7 +28,7 @@ feature "users can manage their account avatar" do
     login_as(user_01)
     visit "/users/#{user_01.id}"
 
-    click_link("Edit Display Name and Avatar")
+    click_link("Modify User Avatar")
     attach_file("User Avatar", "#{Rails.root}/spec/support/test_avatar_too_big.png")
     click_button("Submit")
 
@@ -44,7 +44,7 @@ feature "users can manage their account avatar" do
 
     expect(page).to have_css("img[src*='test_avatar_acceptable.jpg']")
 
-    click_link("Edit Display Name and Avatar")
+    click_link("Modify User Avatar")
     check("Remove avatar?")
     click_button("Submit")
 

@@ -1,6 +1,11 @@
-<h3>Manage Account Avatar</h3>
+<h3>Edit Account Information for <%= @user.display_name %></h3>
 
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, action: "admin_update" ) do |f| %>
+  <div class="field">
+    <%= f.label :display_name, "Display Name" %> <i>(minimum of 5 characters, no spaces)</i><br />
+    <%= f.text_field :display_name %>
+  </div>
+
   <% if @user.avatar.url == @default %>
     <h5>No user avatar provided</h5>
   <% elsif f.object.avatar? && @user.errors.empty? %>

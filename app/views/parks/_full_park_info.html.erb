@@ -28,9 +28,14 @@
       <% if !@park.area_miles.nil? %>
         <li>Area (miles<sup>2</sup>): <%= @park.area_miles %></li>
       <% end %>
+
+      <% if user_signed_in? %>
+        <li><small>Submitted By: <%= link_to "#{@park.user.display_name}", user_path(@park.user) %></small></li>
+      <% else %>
+        <li><small>Submitted By: <%= "#{@park.user.display_name}" %></small></li>
+      <% end %>
+
     </ul>
   </div>
-
-
 
 </div>

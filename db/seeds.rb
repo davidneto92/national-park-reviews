@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(email: "test_email_01@email.com", password: "password", display_name: "ricky4020")
-User.create(email: "test_email_02@email.com", password: "password", display_name: "")
-User.create(email: "test_email_03@email.com", password: "password")
-User.create(email: "test_email_04@email.com", password: "password", role: "admin")
-User.create(email: "test_email_05@email.com", password: "password")
-User.create(email: "test_email_06@email.com", password: "password")
+User.create(email: "test_email_02@email.com", password: "password", display_name: "patriots_lover")
+User.create(email: "test_email_03@email.com", password: "password", display_name: "flower555")
+User.create(email: "test_email_04@email.com", password: "password", display_name: "carManiac", role: "admin")
+User.create(email: "test_email_05@email.com", password: "password", display_name: "car_maniac_4")
+User.create(email: "test_email_06@email.com", password: "password", display_name: "songbird")
 
 
 Park.create(
