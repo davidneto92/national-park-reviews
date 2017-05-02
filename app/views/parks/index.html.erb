@@ -1,32 +1,5 @@
-<h1>All the parks!</h1>
-
 <div class="index-display">
-  <ul>
-
-      <% @parks.each do |park| %>
-        <li>
-          <span class ="park-entry">
-
-            <div class="park-picture-wrapper">
-              <a href="<%= "parks/#{park.id}" %>">
-              <%= image_tag park.main_image.thumb %></a>
-            </div>
-
-            <div class="text-wrapper">
-              <%= link_to "#{park.name}", park_path(park) %>
-              <%= park.state %><br>
-
-              <% if current_user && current_user.admin? %>
-                <%= link_to "Delete Park", park,
-                  method: :delete, data: { confirm: "Are you sure you want to delete the following park:\n #{park.name}" } %><br>
-              <% end %>
-
-            </div>
-
-          </span>
-        </li>
-      <% end %>
-  </ul>
+  <%= render partial: "park_index_display", collection: @parks, as: :park %>
 </div>
 
 <%= paginate @parks, class: "pagination"%>

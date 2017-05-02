@@ -1,37 +1,4 @@
-<% if !current_user.nil? %>
-  <% if current_user.id == @park.user_id || current_user.admin? %>
-    <br><%= link_to "Edit Park", edit_park_path(@park) %><br>
-  <% end %>
-<% end %>
-
-<h1><%= @park.name %></h1>
-<% @test_link %>
-
-<% if user_signed_in? %>
-  <h3>Submitted by <%= link_to "#{@creator_name}", user_path(@park.user) %></h3>
-<% end %>
-
-<ul>
-  <li>Location: <%= @park.state %></li>
-  <% if !@park.year_founded.nil? %>
-    <li>Year Founded: <%= @park.year_founded %></li>
-  <% end %>
-  <% if !@park.area_miles.nil? %>
-    <li>Area (sq. miles): <%= @park.area_miles %></li>
-  <% end %>
-</ul>
-
-
-<%= image_tag @park.main_image.url %><br>
-
-<p>Park Score: <%= @park.calculate_score %></p>
-<% if !current_user.nil? %>
-  <%= render 'park_votes/vote_buttons' %>
-<% end %>
-
-<% if user_signed_in? %>
-  <br><br><%= link_to "Write a Review", new_park_review_path(@park) %>
-<% end %>
+<%= render 'full_park_info' %>
 
 <% if user_signed_in? %>
   <%= javascript_tag do %>
@@ -41,42 +8,7 @@
   <% end %>
 <% end %>
 
-<ul>
-  <h3>Member Reviews</h3>
-  <% @reviews.each do |review| %>
-    <li>
-      <strong><%= review.title %></strong><br>
-
-      <% if !current_user.nil? %>
-        <% if current_user.admin? || current_user.reviews.include?(review) %>
-          <%= link_to "Edit Review", edit_park_review_path(@park, review) %><br>
-          <%= link_to "Delete Review", [@park, review],
-             method: :delete, data: { confirm: "Are you sure you want to delete the following review:\n #{review.title}" } %><br>
-        <% end %>
-      <% end %>
-
-      <%= image_tag review.user.avatar, class: "review-avatar-thumb" %><br>
-      <% if user_signed_in? %>
-        <% if review.user.display_name.nil? || review.user.display_name == "" %>
-            By: <%= link_to "#{review.user.email}", user_path(review.user) %>
-          <% else %>
-            By: <%= link_to "#{review.user.display_name}", user_path(review.user) %>
-        <% end %>
-      <% end %>
-      <%= review.created_at.strftime "posted at %m/%d/%Y" %><br>
-      <%= review.visit_date.strftime "Date of Visit: %m/%d/%Y" %><br>
-      <%= review.body %><br><br>
-
-      <div class="review_score" >
-        Review Score:
-        <p id="review_score_<%=  "#{review.id}" %>" ><%= review.calculate_score %></p>
-        <p>
-          Review rating:
-          <%= button_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow", id: "upvote_#{review.id}", review_id: "#{review.id}" %> -
-          <%= button_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow", id: "downvote_#{review.id}", review_id: "#{review.id}" %>
-        </p>
-    </div>
-
-    </li><br>
-  <% end %>
-<ul>
+<div class="reviews">
+  <h3>Member Reviews (<%= @park.reviews.length %>)</h3>
+  <%= render partial: "reviews/review_display", collection: @reviews, as: :review %>
+</div>

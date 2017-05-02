@@ -1,5 +1,5 @@
 <p>
   Your rating:
-  <%= link_to "⇑", park_upvote_path(@park), method: :post, class: "vote-arrow" %> -
-  <%= link_to "⇓", park_downvote_path(@park), method: :post, class: "vote-arrow" %>
+  <%= button_to "⇑", park_upvote_path(@park), method: :post, class: "vote-arrow" %> -
+  <%= button_to "⇓", park_downvote_path(@park), method: :post, class: "vote-arrow" %>
 </p>

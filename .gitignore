@@ -20,5 +20,6 @@
 /config/application.yml
 
 /app/view/layouts/blog_template.html
+/app/views/layouts/application_backup.html.erb
 
 /app/views/pages/

@@ -1,8 +1,8 @@
-<h1>
+<h3>
   <% if @user.display_name.nil? || @user.display_name == "" %>
-    <%= @user.email %>'s details</h1>
+    <%= @user.email %>'s details</h3>
   <% else %>
-    <%= @user.display_name %>'s details</h1>
+    <%= @user.display_name %>'s details</h3>
   <% end %>
   <%= image_tag @user.avatar.thumb %><br>
 
@@ -25,7 +25,7 @@
   <% end %>
 </ul>
 
-<h3>Reviewed Parks</h3>
+<h3>Submitted Reviews</h3>
 <ul>
   <% @reviews.each do |review| %>
     <li>
