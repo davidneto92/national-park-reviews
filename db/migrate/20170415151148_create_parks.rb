@@ -7,8 +7,6 @@ class CreateParks < ActiveRecord::Migration[5.0]
       t.integer :year_founded
       t.integer :area_miles
 
-      t.integer :vote_score, default: 0
-
       t.references :user, foreign_key: true
 
       t.timestamps

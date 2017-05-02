@@ -1,6 +1,7 @@
 <h3><%= @user.display_name %>'s details</h3>
 <%= image_tag @user.avatar.thumb, class: "avatar-thumb" %><br>
 
+
 <% if current_user.id == @user.id || current_user.admin? %>
   <%= link_to "Manage Account Details", edit_user_registration_path %><br>
   <%= link_to "Modify User Avatar", edit_user_path(@user) %><br><br>

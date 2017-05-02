@@ -25,7 +25,6 @@ feature "users can view a park\'s show page" do
 
     login_as(user_02)
     visit "/parks/#{park_01.id}"
-
     expect(page).to have_content("Submitted By: #{user_01.display_name}")
     expect(page).to have_link("#{user_01.display_name}")
   end

@@ -1,8 +1,7 @@
-# NOTE: Park voting has been disabled for this release
+require "rails_helper"
 
-# require "rails_helper"
-#
-# # these tests may be removed and added to a separate branch for voting
+# NOTE: Park voting has been disabled for initial release
+
 # feature "signed in users can vote on park" do
 #   scenario "signed in user can vote up on park" do
 #     user_01 = FactoryGirl.create(:user)
@@ -13,11 +12,12 @@
 #     visit "/parks/#{park_01.id}"
 #
 #     expect(Park.last.calculate_score).to eq(0)
-#     expect(page).to have_link("⇑")
-#     expect(page).to have_content("Your rating")
-#     expect(page).to have_link("⇓")
+
+#     expect(page).to have_button("⇑")
+#     expect(page).to have_content("Review Score: ")
+#     expect(page).to have_button("⇓")
 #
-#     all("a", :text => "⇑")[0].click
+#     all("button", :text => "⇑")[0].click
 #
 #     expect(Park.last.calculate_score).to eq(1)
 #     expect(Park.last.calculate_score).to_not eq(0)

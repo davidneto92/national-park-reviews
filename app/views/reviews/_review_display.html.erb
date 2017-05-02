@@ -19,20 +19,18 @@
       </p>
     </div>
 
-    <div class="review-voting-container">
-      <div class="review_score" >
-
-        <ul class="menu simple">
-
-          <li><p id="review_score_<%=  "#{review.id}" %>" >Review Score: <%= review.calculate_score %></li>
-          <li><%= button_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow button", id: "upvote_#{review.id}", review_id: "#{review.id}" %></li>
-          <li><%= button_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow button", id: "downvote_#{review.id}", review_id: "#{review.id}" %></li>
-          </p>
-
-        </ul>
-
+    <% if !current_user.nil? %>
+      <div class="review-voting-container">
+        <div class="review_score" >
+          <ul class="menu simple">
+            <li><p id="review_score_<%=  "#{review.id}" %>" >Review Score: <%= review.calculate_score %></li>
+            <li><%= button_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow button", id: "upvote_#{review.id}", review_id: "#{review.id}" %></li>
+            <li><%= button_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow button", id: "downvote_#{review.id}", review_id: "#{review.id}" %></li>
+            </p>
+          </ul>
+        </div>
       </div>
-    </div>
+      <% end %>
 
   <div class="review-controls">
     <ul class="menu simple">
