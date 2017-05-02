@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :users do
+    get 'admin_edit'
+  end
+
   resources :parks do
     resources :reviews
   end

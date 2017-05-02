@@ -12,6 +12,7 @@ require "rails_helper"
 #     visit "/parks/#{park_01.id}"
 #
 #     expect(Park.last.calculate_score).to eq(0)
+
 #     expect(page).to have_button("⇑")
 #     expect(page).to have_content("Review Score: ")
 #     expect(page).to have_button("⇓")

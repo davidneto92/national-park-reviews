@@ -6,27 +6,29 @@ feature "users can edit their account details" do
     login_as(user_01)
     visit "/users/#{user_01.id}"
 
-    expect(page).to have_content("Display Name: not set")
+    expect(page).to have_content("#{user_01.display_name}'s details")
 
-    click_link "Edit Display Name and Avatar"
-    fill_in "Display Name", with: "test name"
-    click_button "Submit"
+    click_link "Manage Account Details"
+    fill_in "Display Name", with: "testname"
+    fill_in "Current password", with: user_01.password
+    click_button "Update"
 
-    expect(page).to have_content("Display Name: test name")
+    expect(User.first.display_name).to eq("testname")
   end
 
-  scenario "users can remove the display name from their account" do
+  scenario "users can't enter and invalid display name from their account" do
     user_01 = FactoryGirl.create(:user, display_name: "Mountain_man")
     login_as(user_01)
     visit "/users/#{user_01.id}"
 
-    expect(page).to have_content("Display Name: Mountain_man")
+    expect(page).to have_content("Mountain_man's details")
 
-    click_link "Edit Display Name and Avatar"
-    fill_in "Display Name", with: ""
-    click_button "Submit"
+    click_link "Manage Account Details"
+    fill_in "Display Name", with: "bad#name"
+    fill_in "Current password", with: user_01.password
+    click_button "Update"
 
-    expect(page).to have_content("Display Name: not set")
+    expect(page).to have_content("Display name Only allows letters and numbers")
   end
 
   scenario "users can change their password" do
@@ -34,7 +36,7 @@ feature "users can edit their account details" do
     login_as(user_01)
 
     visit "/users/#{user_01.id}"
-    click_link "Manage Sign in Details"
+    click_link "Manage Account Details"
 
     fill_in "Password", with: "newpassword"
     fill_in "Password confirmation", with: "newpassword"
@@ -42,7 +44,6 @@ feature "users can edit their account details" do
     click_button "Update"
 
     expect(page).to have_content("Your account has been updated successfully.")
-    # expect(User.all.last.password).to eq("newpassword")
     # I can't figure out how to validate that the password changed besides
     # using the following block:
 
@@ -59,7 +60,7 @@ feature "users can edit their account details" do
     login_as(user_01)
 
     visit "/users/#{user_01.id}"
-    click_link "Manage Sign in Details"
+    click_link "Manage Account Details"
 
     fill_in "Email", with: "new_email@email.com"
     fill_in "Current password", with: user_01.password

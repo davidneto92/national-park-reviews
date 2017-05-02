@@ -1,5 +1,3 @@
-require "rails_helper"
-
 feature "users can search through the parks" do
   scenario "entering search terms will return relevant parks" do
     user_01 = FactoryGirl.create(:user)
@@ -12,10 +10,7 @@ feature "users can search through the parks" do
     click_button "Search"
 
     expect(page).to have_link("Grand Canyon National Park")
-    # expect(page).to_not have_link("Saguaro National Park")
     expect(page).to_not have_xpath("//div[.=index-display]/..", text: "Saguaro National Park")
-
-
   end
 
   scenario "entering search terms matching multiple parks will return all results" do

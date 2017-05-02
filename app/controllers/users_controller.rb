@@ -1,20 +1,24 @@
 class UsersController < ApplicationController
   before_action :authorize_sign_in
-  before_action :authorize_admin, only: [:index]
+  before_action :authorize_admin, only: [:index, :admin_edit, :admin_update]
   before_action :authorize_edit, only: [:edit, :update, :destroy]
 
+  DEFAULT_AVATAR = "https://s3.amazonaws.com/national-park-reviews-development/uploads/avatars/default_avatar.jpg"
+
   def index
-    @users = User.all
+    @users = User.all.order(:id)
   end
 
   def show
     @user = User.find(params[:id])
     @parks = @user.parks
     @reviews = @user.reviews
+    @default = DEFAULT_AVATAR
   end
 
   def edit
     @user = User.find(params[:id])
+    @default = DEFAULT_AVATAR
   end
 
   def update
@@ -27,6 +31,14 @@ class UsersController < ApplicationController
       flash[:alert] = "That image is too large. Avatars must be smaller than 500kb."
       render :edit
     end
+  end
+
+  def admin_edit
+    @user = User.find(params[:user_id])
+  end
+
+  def destroy
+    binding.pry
   end
 
   private

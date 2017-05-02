@@ -11,16 +11,16 @@ feature "users can view all reviews of parks" do
     login_as(user_02)
 
     visit "parks/#{park_01.id}"
-    expect(page).to have_link("#{user_01.email}")
+    expect(page).to have_link("#{user_01.display_name}")
     expect(page).to have_content("#{review_01.title}")
     expect(page).to have_content("#{review_01.body}")
-    expect(page).to have_link("#{user_02.email}")
+    expect(page).to have_link("#{user_02.display_name}")
     expect(page).to have_content("#{review_02.title}")
     expect(page).to have_content("#{review_02.body}")
   end
 
   scenario "reviews show user's display name if available" do
-    user_01 = FactoryGirl.create(:user, display_name: "Luke Skywalker")
+    user_01 = FactoryGirl.create(:user, display_name: "Luke_Skywalker")
     park_01 = FactoryGirl.create(:park, user_id: user_01.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
     review_01 = FactoryGirl.create(:review, user_id: user_01.id, park_id: park_01.id)
 
@@ -32,7 +32,7 @@ feature "users can view all reviews of parks" do
   end
 
   scenario "reviews display user avatar" do
-    user_01 = FactoryGirl.create(:user, display_name: "Leia Organa", avatar: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/test_author_avatar.jpg'))))
+    user_01 = FactoryGirl.create(:user, display_name: "Leia_Organa", avatar: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/test_author_avatar.jpg'))))
     park_01 = FactoryGirl.create(:park, user_id: user_01.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
     review_01 = FactoryGirl.create(:review, user_id: user_01.id, park_id: park_01.id)
 
@@ -40,17 +40,6 @@ feature "users can view all reviews of parks" do
 
     visit "parks/#{park_01.id}"
     expect(page).to have_link("#{user_01.display_name}")
-    expect(page).to have_content("#{review_01.title}")
-    expect(page).to have_css("img[src*='test_author_avatar.jpg']")
-  end
-
-  scenario "reviews will not display author's name if current user is not signed in" do
-    user_01 = FactoryGirl.create(:user, display_name: "Leia Organa", avatar: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/test_author_avatar.jpg'))))
-    park_01 = FactoryGirl.create(:park, user_id: user_01.id, main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/mountains_01.jpg'))))
-    review_01 = FactoryGirl.create(:review, user_id: user_01.id, park_id: park_01.id)
-
-    visit "parks/#{park_01.id}"
-    expect(page).to_not have_content("#{user_01.display_name}")
     expect(page).to have_content("#{review_01.title}")
     expect(page).to have_css("img[src*='test_author_avatar.jpg']")
   end
