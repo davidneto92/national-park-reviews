@@ -9,6 +9,9 @@
 <% end %>
 
 <div class="reviews">
-  <h3>Member Reviews (<%= @park.reviews.length %>)</h3>
+  <h3>Member Reviews (<%= @park.reviews.length %>)
+    <% if !current_user.nil?%>
+      - <%= link_to "Write a Review", new_park_review_path(@park) %>
+    <% end %></h3>
   <%= render partial: "reviews/review_display", collection: @reviews, as: :review %>
 </div>

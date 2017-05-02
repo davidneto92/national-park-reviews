@@ -4,7 +4,7 @@
   <% else %>
     <%= @user.display_name %>'s details</h3>
   <% end %>
-  <%= image_tag @user.avatar.thumb %><br>
+  <%= image_tag @user.avatar.thumb, class: "avatar-thumb" %><br>
 
 <% if current_user.id == @user.id || current_user.admin? %>
   <%= link_to "Manage Sign in Details", edit_user_registration_path %><br>

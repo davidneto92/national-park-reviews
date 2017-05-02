@@ -4,6 +4,7 @@ class ParksController < ApplicationController
 
   def index
     if params[:search_terms]
+      ActiveRecord::Base.connection.execute("SELECT set_limit(0.15);")
       @parks = Park.fuzzy_search(params[:search_terms]).page params[:page]
       if Park.fuzzy_search(params[:search_terms]).empty?
         flash.now[:notice] = "No results found for #{params[:search_terms]}."
