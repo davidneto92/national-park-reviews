@@ -57,7 +57,7 @@
         <%= yield %>
       </div>
 
-      <% if controller.action_name == "index" || controller.action_name == "show" %>
+      <% if controller.lookup_context.prefixes[0] == "parks" %>
         <div class="medium-4 columns" data-sticky-container>
           <div class="sticky is-anchored" data-sticky data-top-anchor="root:content">
             <%= form_tag(parks_path, method: "get") do %>

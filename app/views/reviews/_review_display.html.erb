@@ -1,0 +1,55 @@
+<div class="callout comment-container ">
+
+    <div class="review-author-picture medium-2 columns">
+      <%= image_tag review.user.avatar, class: "review-avatar-thumb" %>
+    </div>
+    <div class="review-info-container medium-10 columns">
+      <strong><%= review.title %></strong><br>
+      <% if user_signed_in? %>
+        <% if review.user.display_name.nil? || review.user.display_name == "" %>
+            By: <%= link_to "#{review.user.email}", user_path(review.user) %>
+          <% else %>
+            By: <%= link_to "#{review.user.display_name}", user_path(review.user) %>
+        <% end %>
+      <% end %>
+      <br><%= review.visit_date.strftime "Date of Visit: %m/%d/%Y" %>
+    </div>
+
+    <div class="comment-section-text">
+      <p>
+        <%= review.body %>
+      </p>
+    </div>
+
+    <div class="review-voting-container">
+      <div class="review_score" >
+
+        <ul class="menu simple">
+
+          <li><p id="review_score_<%=  "#{review.id}" %>" >Review Score: <%= review.calculate_score %></li>
+          <li><%= button_to "⇑", review_upvote_path(review), method: :post, class: "upvote-arrow button", id: "upvote_#{review.id}", review_id: "#{review.id}" %></li>
+          <li><%= button_to "⇓", review_downvote_path(review), method: :post, class: "downvote-arrow button", id: "downvote_#{review.id}", review_id: "#{review.id}" %></li>
+          </p>
+
+        </ul>
+
+      </div>
+    </div>
+
+  <div class="review-controls">
+    <ul class="menu simple">
+      <li><small><%= review.created_at.strftime "posted on: %m/%d/%Y" %></small></li>
+
+      <% if !current_user.nil? %>
+        <% if current_user.admin? || review.user == current_user %>
+          <li><%= link_to "Edit Review", edit_park_review_path(@park, review) %></li>
+          <li><%= link_to "Delete Review", [@park, review],
+            method: :delete, data: { confirm: "Are you sure you want to delete the following review:\n #{review.title}" } %></li>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
+
+<br>

@@ -34,11 +34,13 @@ class ParksController < ApplicationController
   def new
     @park = Park.new
     @state_collection = Park::STATES
+    recent_data
   end
 
   def edit
     @park = Park.find(params[:id])
     @state_collection = Park::STATES
+    recent_data
   end
 
   def create

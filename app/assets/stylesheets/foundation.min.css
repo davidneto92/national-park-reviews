@@ -1,30 +1,14 @@
+.comment-container {
+  /*background-color: white!important;*/
+}
+
+.review-info-container {
+  padding-bottom: 1em;
+}
+
 .review-avatar-thumb {
   length: 150px;
   width: 150px
-}
-
-.upvote-arrow {
-  font-weight: bold;
-}
-
-.downvote-arrow {
-  font-weight: bold;
-}
-
-.upvote {
-  color: green;
-}
-
-.upvote:hover {
-  color: green;
-}
-
-.downvote {
-  color: red;
-}
-
-.downvote:hover {
-  color: red;
 }
 
 .park-display {
@@ -5508,4 +5492,22 @@ a.thumbnail image {
 
 .long-delay {
   animation-delay: .7s!important
+}
+
+/*--------------------------------*/
+
+.upvote-arrow {
+  font-weight: bold;
+}
+
+.downvote-arrow {
+  font-weight: bold;
+}
+
+.upvote {
+  color: #39FF14;
+}
+
+.downvote {
+  color: red;
 }

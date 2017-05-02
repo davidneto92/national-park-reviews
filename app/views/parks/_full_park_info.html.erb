@@ -2,7 +2,7 @@
   <h3><%= @park.name %><br><small>  <%= @park.state %></small></h3>
 
   <div class="park-display">
-    <a href="<%= "parks/#{@park.id}" %>"><%= image_tag @park.main_image, class: "park-display-image" %></a>
+    <%= image_tag @park.main_image, class: "park-display-image" %>
   </div>
 
 
