@@ -13,7 +13,6 @@ gem 'fog'
 gem 'figaro'
 gem 'kaminari'
 gem 'textacular'
-gem 'coffee-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -23,7 +22,6 @@ group :development do
 end
 
 group :development, :test do
-  # gem 'dotenv-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
