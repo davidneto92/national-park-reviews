@@ -13,6 +13,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'kaminari'
 gem 'textacular'
+gem 'rest-client'
 
 group :development do
   gem 'listen', '~> 3.0.5'
