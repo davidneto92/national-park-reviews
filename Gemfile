@@ -3,6 +3,7 @@ source 'https://rubygems.org/'
 gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
+gem 'delayed_job_active_record'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -10,7 +11,6 @@ gem 'devise'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
-gem 'figaro'
 gem 'kaminari'
 gem 'textacular'
 
@@ -23,6 +23,7 @@ end
 
 group :development, :test do
   gem 'capybara'
+  gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
   gem 'pry-rails'
