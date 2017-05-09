@@ -23,3 +23,6 @@
 /app/views/layouts/application_backup.html.erb
 
 /app/views/pages/
+
+.env
+*.sw*

@@ -10,11 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502121808) do
+ActiveRecord::Schema.define(version: 20170503003514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
 
   create_table "park_votes", force: :cascade do |t|
     t.integer  "choice"
@@ -27,15 +42,14 @@ ActiveRecord::Schema.define(version: 20170502121808) do
   end
 
   create_table "parks", force: :cascade do |t|
-    t.string   "name",                     null: false
-    t.string   "main_image",               null: false
-    t.string   "state",                    null: false
+    t.string   "name",         null: false
+    t.string   "main_image",   null: false
+    t.string   "state",        null: false
     t.integer  "year_founded"
     t.integer  "area_miles"
-    t.integer  "vote_score",   default: 0
     t.integer  "user_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["user_id"], name: "index_parks_on_user_id", using: :btree
   end
 
@@ -52,14 +66,13 @@ ActiveRecord::Schema.define(version: 20170502121808) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text     "title",                  null: false
-    t.string   "body",                   null: false
+    t.text     "title",      null: false
+    t.string   "body",       null: false
     t.date     "visit_date"
-    t.integer  "vote_score", default: 0
     t.integer  "park_id"
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["park_id"], name: "index_reviews_on_park_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
