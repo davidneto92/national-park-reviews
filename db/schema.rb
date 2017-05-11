@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503003514) do
+ActiveRecord::Schema.define(version: 20170511170603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,15 +41,28 @@ ActiveRecord::Schema.define(version: 20170503003514) do
     t.index ["user_id"], name: "index_park_votes_on_user_id", using: :btree
   end
 
+  create_table "park_weathers", force: :cascade do |t|
+    t.jsonb    "forecast_day_0"
+    t.jsonb    "forecast_day_1"
+    t.jsonb    "forecast_day_2"
+    t.jsonb    "forecast_day_3"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "park_id"
+    t.index ["park_id"], name: "index_park_weathers_on_park_id", using: :btree
+  end
+
   create_table "parks", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.string   "main_image",   null: false
-    t.string   "state",        null: false
+    t.string   "name",                null: false
+    t.string   "main_image",          null: false
+    t.string   "state",               null: false
     t.integer  "year_founded"
     t.integer  "area_miles"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "nearby_city"
+    t.datetime "last_weather_update"
     t.index ["user_id"], name: "index_parks_on_user_id", using: :btree
   end
 
@@ -98,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170503003514) do
 
   add_foreign_key "park_votes", "parks"
   add_foreign_key "park_votes", "users"
+  add_foreign_key "park_weathers", "parks"
   add_foreign_key "parks", "users"
   add_foreign_key "review_votes", "parks"
   add_foreign_key "review_votes", "reviews"

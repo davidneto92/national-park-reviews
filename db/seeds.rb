@@ -17,6 +17,9 @@ User.create(email: "test_email_06@email.com", password: "password", display_name
 Park.create(
   name: "Arches National Park",
   state: "Utah",
+
+  nearby_city: "Moab",
+
   user_id: (rand(6) + 1),
   year_founded: 1929,
   area_miles: 120,
