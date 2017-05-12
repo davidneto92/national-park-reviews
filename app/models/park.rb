@@ -6,7 +6,7 @@ class Park < ApplicationRecord
   has_many :park_votes, :dependent => :delete_all
   has_many :review_votes, :dependent => :delete_all
 
-  has_many :park_weathers
+  has_many :park_forecasts
 
   validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true

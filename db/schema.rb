@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20170511170603) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "park_forecasts", force: :cascade do |t|
+    t.jsonb    "forecast_day_0"
+    t.jsonb    "forecast_day_1"
+    t.jsonb    "forecast_day_2"
+    t.jsonb    "forecast_day_3"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "park_id"
+    t.index ["park_id"], name: "index_park_forecasts_on_park_id", using: :btree
+  end
+
   create_table "park_votes", force: :cascade do |t|
     t.integer  "choice"
     t.integer  "park_id"
@@ -41,28 +52,17 @@ ActiveRecord::Schema.define(version: 20170511170603) do
     t.index ["user_id"], name: "index_park_votes_on_user_id", using: :btree
   end
 
-  create_table "park_weathers", force: :cascade do |t|
-    t.jsonb    "forecast_day_0"
-    t.jsonb    "forecast_day_1"
-    t.jsonb    "forecast_day_2"
-    t.jsonb    "forecast_day_3"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "park_id"
-    t.index ["park_id"], name: "index_park_weathers_on_park_id", using: :btree
-  end
-
   create_table "parks", force: :cascade do |t|
-    t.string   "name",                null: false
-    t.string   "main_image",          null: false
-    t.string   "state",               null: false
+    t.string   "name",                 null: false
+    t.string   "main_image",           null: false
+    t.string   "state",                null: false
     t.integer  "year_founded"
     t.integer  "area_miles"
     t.integer  "user_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "nearby_city"
-    t.datetime "last_weather_update"
+    t.datetime "last_forecast_update"
     t.index ["user_id"], name: "index_parks_on_user_id", using: :btree
   end
 
@@ -109,9 +109,9 @@ ActiveRecord::Schema.define(version: 20170511170603) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "park_forecasts", "parks"
   add_foreign_key "park_votes", "parks"
   add_foreign_key "park_votes", "users"
-  add_foreign_key "park_weathers", "parks"
   add_foreign_key "parks", "users"
   add_foreign_key "review_votes", "parks"
   add_foreign_key "review_votes", "reviews"

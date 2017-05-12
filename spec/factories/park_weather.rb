@@ -4,7 +4,7 @@ url = "http://api.wunderground.com/api/8c45b1973db20c1d/forecast/q/UT/Moab.json"
 sample_json = JSON.parse(RestClient.get(url))
 
 FactoryGirl.define do
-  factory :park_weather do
+  factory :park_forecast do
     forecast_day_0 sample_json["forecast"]["simpleforecast"]["forecastday"][0]
     forecast_day_1 sample_json["forecast"]["simpleforecast"]["forecastday"][1]
     forecast_day_2 sample_json["forecast"]["simpleforecast"]["forecastday"][2]
