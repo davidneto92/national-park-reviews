@@ -22,10 +22,11 @@ class ParksController < ApplicationController
     @review_id_list = @reviews.map { |review| review.id }
     recent_data # for displaying on side bar
 
-    # this will display the forecast div if the weather has been updated today
+    # this will display the forecast div if the weather has been updated
     if !@park.park_forecasts.empty?
       @display_weather = true
       @forecast = @park.park_forecasts.last
+      @simple_forecast = @forecast.simple_forecasts
     else
       @display_weather = false
     end

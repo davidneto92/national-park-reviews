@@ -1,28 +1,13 @@
 <div class="callout">
   <div class="row text-center">
-    <div class="small-2 large-3 columns">
-      <%= "#{@forecast.forecast_day_0["date"]["weekday"]}, #{@forecast.forecast_day_0["date"]["month"]}/#{@forecast.forecast_day_0["date"]["day"]}" %>
-      <%= "High: #{@forecast.forecast_day_0["high"]["fahrenheit"]} ˚F" %><br>
-      <%= "Low: #{@forecast.forecast_day_0["low"]["fahrenheit"]} ˚F" %>
-    </div>
-
-    <div class="small-2 large-3 columns">
-      <%= "#{@forecast.forecast_day_1["date"]["weekday"]}, #{@forecast.forecast_day_1["date"]["month"]}/#{@forecast.forecast_day_1["date"]["day"]}" %><br>
-      <%= "High: #{@forecast.forecast_day_1["high"]["fahrenheit"]} ˚F" %><br>
-      <%= "Low: #{@forecast.forecast_day_1["low"]["fahrenheit"]} ˚F" %>
-    </div>
-
-    <div class="small-2 large-3 columns">
-      <%= "#{@forecast.forecast_day_2["date"]["weekday"]}, #{@forecast.forecast_day_2["date"]["month"]}/#{@forecast.forecast_day_2["date"]["day"]}" %><br>
-      <%= "High: #{@forecast.forecast_day_2["high"]["fahrenheit"]} ˚F" %><br>
-      <%= "Low: #{@forecast.forecast_day_2["low"]["fahrenheit"]} ˚F" %>
-    </div>
-
-    <div class="small-2 large-3 columns">
-      <%= "#{@forecast.forecast_day_3["date"]["weekday"]}, #{@forecast.forecast_day_3["date"]["month"]}/#{@forecast.forecast_day_3["date"]["day"]}" %><br>
-      <%= "High: #{@forecast.forecast_day_3["high"]["fahrenheit"]} ˚F" %><br>
-      <%= "Low: #{@forecast.forecast_day_3["low"]["fahrenheit"]} ˚F" %>
-    </div>
+    <% @simple_forecast.each do |forecast| %>
+      <div class="small-2 large-3 columns">
+        <strong><%= forecast[:date] %></strong>
+        <p class="temp-display">High: <%= forecast[:high] %>˚F</p><br>
+        <p class="temp-display">Low: <%= forecast[:low] %>˚F</p>
+      </div>
+    <% end %>
 
   </div>
+  <small><%= (@forecast.created_at - 14400).strftime "as of %I:%M%P %m/%d EST" %></small>
 </div>
