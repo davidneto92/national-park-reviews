@@ -17,19 +17,19 @@ class ParksController < ApplicationController
 
   def show
     @park = Park.find(params[:id])
-    # @state = Park::STATES.find { |state| state.include?(@park.state) }
-
-    # need to update this logic to account for spaces, may need to
-    # add regex validation to prevent spaces
-    if @park.user.display_name.nil? || @park.user.display_name == ""
-      @creator_name = @park.user.email
-    else
-      @creator_name = @park.user.display_name
-    end
-
+    @creator_name = @park.user.display_name
     @reviews = Review.where(park_id: params[:id]).order('created_at DESC')
     @review_id_list = @reviews.map { |review| review.id }
-    recent_data
+    recent_data # for displaying on side bar
+
+    # this will display the forecast div if the weather has been updated today
+    if !@park.park_forecasts.empty?
+      @display_weather = true
+      @forecast = @park.park_forecasts.last
+    else
+      @display_weather = false
+    end
+
   end
 
   def new
