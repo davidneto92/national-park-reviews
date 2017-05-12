@@ -1,4 +1,6 @@
 <div class="callout">
+  <h5>Forecast for <%= "#{@park.nearby_city}, #{@park.state_abbreviation}" %></h5>
+
   <div class="row text-center">
     <% @simple_forecast.each do |forecast| %>
       <div class="small-2 large-3 columns">
@@ -9,5 +11,5 @@
     <% end %>
 
   </div>
-  <small><%= (@forecast.created_at - 14400).strftime "as of %I:%M%P %m/%d EST" %></small>
+  <p><small><%= (@forecast.created_at - 14400).strftime "updated at %I:%M%P %m/%d EST" %></small></p>
 </div>
