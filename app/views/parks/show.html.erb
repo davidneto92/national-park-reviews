@@ -1,4 +1,8 @@
-<%= render 'full_park_info' %>
+<%= render "full_park_info" %>
+
+<% if @display_weather %>
+  <%= render "park_forecasts/park_3_day_forecast" %>
+<% end %>
 
 <% if user_signed_in? %>
   <%= javascript_tag do %>

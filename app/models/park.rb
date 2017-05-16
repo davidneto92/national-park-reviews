@@ -6,6 +6,8 @@ class Park < ApplicationRecord
   has_many :park_votes, :dependent => :delete_all
   has_many :review_votes, :dependent => :delete_all
 
+  has_many :park_forecasts
+
   validates :name, presence: true, uniqueness: { message: " - This park has already been created." }
   validates :main_image, presence: true
 
@@ -123,6 +125,10 @@ class Park < ApplicationRecord
     else
       return 0
     end
+  end
+
+  def state_abbreviation
+    Park::ABBREVIATIONS[ Park::STATES.index(self.state) ]
   end
 
 end

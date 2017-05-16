@@ -1,6 +1,6 @@
 source 'https://rubygems.org/'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'delayed_job_active_record'
@@ -14,6 +14,7 @@ gem 'fog'
 gem 'kaminari'
 gem 'textacular'
 gem 'rest-client'
+gem 'figaro'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -24,12 +25,12 @@ end
 
 group :development, :test do
   gem 'capybara'
-  gem 'dotenv-rails'
+  # gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.5'
-  gem 'shoulda'
+  gem 'rspec-rails'
+  gem 'shoulda' # not currently in use
   gem 'valid_attribute'
   gem 'database_cleaner'
 end
