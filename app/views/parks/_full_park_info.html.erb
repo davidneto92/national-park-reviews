@@ -37,6 +37,15 @@
 
     </ul>
 
+    <% if !@park.nps_description.nil? %>
+      <div class="callout nps-description">
+        <p>
+          <%= @park.nps_description %>
+        </p>
+        <small>from NPS.gov</small>
+      </div>
+    <% end %>
+
   </div>
 
 </div>

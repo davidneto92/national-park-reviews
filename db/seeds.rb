@@ -16,8 +16,9 @@ User.create(email: "test_email_06@email.com", password: "password", display_name
 
 Park.create(
   name: "Arches National Park",
-  state: "Utah",
+  nps_page: "https://www.nps.gov/arch/index.htm",
 
+  state: "Utah",
   nearby_city: "Moab",
 
   user_id: (rand(6) + 1),
@@ -28,6 +29,8 @@ Park.create(
 
 Park.create(
   name: "Everglades National Park",
+  nps_page: "https://www.nps.gov/ever/index.htm",
+
   state: "Florida",
   user_id: (rand(6) + 1),
   year_founded: 1947,
@@ -37,7 +40,9 @@ Park.create(
 
 Park.create(
   name: "Voyageurs National Park",
-  state: "Florida",
+  nps_page: "https://www.nps.gov/voya/index.htm",
+
+  state: "Minnesota",
   user_id: (rand(6) + 1),
   year_founded: 1975,
   area_miles: 341,
@@ -46,6 +51,8 @@ Park.create(
 
 Park.create(
   name: "Yosemite National Park",
+  nps_page: "https://www.nps.gov/yose/index.htm",
+
   state: "California",
   user_id: (rand(6) + 1),
   year_founded: 1890,
@@ -55,6 +62,8 @@ Park.create(
 
 Park.create(
   name: "Rocky Mountains National Park",
+  nps_page: "https://www.nps.gov/romo/index.htm",
+
   state: "Colorado",
   user_id: (rand(6) + 1),
   year_founded: 1915,
@@ -64,6 +73,8 @@ Park.create(
 
 Park.create(
   name: "Mammoth Cave National Park",
+  nps_page: "https://www.nps.gov/maca/index.htm",
+
   state: "Kentucky",
   user_id: (rand(6) + 1),
   year_founded: 1941,
@@ -72,6 +83,8 @@ Park.create(
 
 Park.create(
   name: "Glacier National Park",
+  nps_page: "https://www.nps.gov/glac/index.htm",
+
   state: "Montana",
   user_id: (rand(6) + 1),
   main_image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/seeds/park_07.jpg')))
@@ -79,6 +92,8 @@ Park.create(
 
 Park.create(
   name: "Virgin Islands National Park",
+  nps_page: "https://www.nps.gov/viis/index.htm",
+
   state: "US Territories",
   user_id: (rand(6) + 1),
   year_founded: 1956,
@@ -88,6 +103,8 @@ Park.create(
 
 Park.create(
   name: "Black Canyon of the Gunnison National Park",
+  nps_page: "https://www.nps.gov/blca/index.htm",
+
   state: "Colorado",
   user_id: (rand(6) + 1),
   year_founded: 1999,

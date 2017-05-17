@@ -413,6 +413,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mini_magick
+  nokogiri
   pg (~> 0.18)
   pry-rails
   puma (~> 3.0)

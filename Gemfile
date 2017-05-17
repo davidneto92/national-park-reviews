@@ -16,6 +16,8 @@ gem 'textacular'
 gem 'rest-client'
 gem 'figaro'
 
+gem 'nokogiri'
+
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
